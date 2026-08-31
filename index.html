@@ -2,9 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>ZENTRO | منصة الأدوات العالمية</title>
+<title>ZENTRO ⚡ | أدوات مجانية</title>
 
 <meta name="description" content="ZENTRO منصة عالمية للأدوات الرقمية المجانية.">
 
@@ -15,8 +15,8 @@
   --bg:#f5f7fb;
   --card:#ffffff;
   --text:#172033;
-  --muted:#6b7280;
-  --border:#e5e7eb;
+  --muted:#64748b;
+  --border:#e2e8f0;
 }
 
 *{
@@ -54,7 +54,7 @@ button{
 header{
   background:linear-gradient(135deg,var(--primary),var(--secondary));
   color:white;
-  padding:20px 0 70px;
+  padding:20px 0 65px;
 }
 
 nav{
@@ -65,7 +65,7 @@ nav{
 }
 
 .logo{
-  font-size:28px;
+  font-size:30px;
   font-weight:900;
 }
 
@@ -78,43 +78,39 @@ nav{
   gap:8px;
 }
 
-.btn-light{
+.light{
   background:white;
   color:var(--primary);
 }
 
-.btn-dark{
+.dark-btn{
   background:#172033;
   color:white;
 }
 
 .hero{
   text-align:center;
-  padding-top:65px;
+  padding:50px 0 0;
 }
 
 .hero h1{
-  font-size:42px;
+  font-size:40px;
   margin:0;
-}
-
-.hero h1 span{
-  color:#facc15;
 }
 
 .hero p{
   max-width:700px;
-  margin:18px auto;
+  margin:15px auto;
   line-height:1.8;
 }
 
 .search-box{
-  display:flex;
   max-width:650px;
   margin:25px auto 0;
   background:white;
   padding:7px;
   border-radius:16px;
+  display:flex;
 }
 
 .search-box input{
@@ -137,13 +133,13 @@ main{
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin-top:-35px;
+  gap:12px;
+  margin-top:-30px;
 }
 
 .stat{
   background:var(--card);
-  padding:20px;
+  padding:18px;
   border-radius:18px;
   text-align:center;
   box-shadow:0 8px 25px rgba(0,0,0,.08);
@@ -151,124 +147,80 @@ main{
 
 .stat b{
   display:block;
-  font-size:24px;
+  font-size:23px;
   color:var(--primary);
 }
 
 .stat span{
-  font-size:13px;
   color:var(--muted);
+  font-size:13px;
 }
 
 .section{
   margin-top:40px;
 }
 
-.section-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.section-head h2{
-  margin:0;
-}
-
-.section-head p{
-  color:var(--muted);
-}
-
-.category-list{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:12px;
-  margin-top:20px;
-}
-
-.category{
-  background:var(--card);
-  padding:18px 10px;
-  border-radius:18px;
-  text-align:center;
-  border:1px solid var(--border);
-}
-
-.category span{
-  display:block;
-  font-size:28px;
+.section h2{
   margin-bottom:8px;
 }
 
-.category small{
-  font-weight:bold;
+.muted{
+  color:var(--muted);
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:16px;
-  margin-top:20px;
+  gap:15px;
 }
 
-.tool-card{
+.card,
+.tool-box{
   background:var(--card);
   border:1px solid var(--border);
   border-radius:20px;
   padding:20px;
 }
 
-.tool-icon{
-  font-size:35px;
+.icon{
+  font-size:32px;
 }
 
-.tool-card h3{
-  margin:12px 0 8px;
+.card h3{
+  margin:10px 0 5px;
 }
 
-.tool-card p{
+.card p{
   color:var(--muted);
   font-size:14px;
 }
 
-.ad{
-  margin:35px 0;
-  padding:25px;
-  text-align:center;
-  border-radius:18px;
-  border:2px dashed var(--border);
-  color:var(--muted);
-  background:var(--card);
+.tool-box{
+  margin-top:16px;
 }
 
-.tool-area{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:20px;
-  margin-top:20px;
-}
-
-.tool-area h3{
+.tool-box h3{
   margin-top:0;
 }
 
-input,textarea{
+input,
+textarea{
   width:100%;
-  padding:14px;
-  border-radius:12px;
   border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px;
 }
 
 textarea{
   min-height:120px;
+  resize:vertical;
 }
 
-.tool-buttons{
+.actions{
   display:flex;
   gap:10px;
-  margin-top:12px;
   flex-wrap:wrap;
+  margin-top:12px;
 }
 
 .primary{
@@ -276,26 +228,30 @@ textarea{
   color:white;
 }
 
-.success{
-  background:#16a34a;
-  color:white;
-}
-
-.tool-result{
-  margin-top:15px;
-  padding:15px;
-  border-radius:12px;
+.result{
+  margin-top:14px;
+  padding:14px;
   background:var(--bg);
-  font-weight:bold;
+  border-radius:12px;
   word-break:break-word;
 }
 
+.ad{
+  margin:30px 0;
+  padding:25px;
+  border:2px dashed var(--border);
+  border-radius:18px;
+  text-align:center;
+  color:var(--muted);
+  background:var(--card);
+}
+
 footer{
-  margin-top:60px;
-  padding:40px 20px;
+  margin-top:50px;
+  padding:35px;
+  text-align:center;
   background:#111827;
   color:white;
-  text-align:center;
 }
 
 .dark{
@@ -312,7 +268,7 @@ footer{
   }
 
   .hero h1{
-    font-size:30px;
+    font-size:29px;
   }
 
   .stats{
@@ -323,197 +279,124 @@ footer{
 </head>
 
 <body>
-  <header>
-  <div class="container">
 
-    <nav>
-      <div class="logo">ZEN<span>TRO</span> ⚡</div>
+<header>
+<div class="container">
 
-      <div class="nav-actions">
-        <button class="btn-light" onclick="toggleLanguage()">🌍 Language</button>
-        <button class="btn-dark" onclick="toggleDark()">🌙</button>
-      </div>
-    </nav>
+<nav>
+  <div class="logo">ZEN<span>TRO</span> ⚡</div>
 
-    <div class="hero">
-      <h1>كل أدواتك في مكان واحد مع <span>ZENTRO</span> ⚡</h1>
-
-      <p>
-        منصة عالمية تجمع الأدوات الرقمية المجانية والإنتاجية
-        والتعلم والتصميم والحاسبات والخدمات المفيدة.
-      </p>
-
-      <div class="search-box">
-        <input
-          id="searchInput"
-          placeholder="ابحث عن أداة أو خدمة..."
-          oninput="searchTools()"
-        >
-        <button onclick="searchTools()">🔍 بحث</button>
-      </div>
-    </div>
-
+  <div class="nav-actions">
+    <button class="light" onclick="toggleLanguage()">🌍 اللغة</button>
+    <button class="dark-btn" onclick="toggleDark()">🌙</button>
   </div>
+</nav>
+
+<div class="hero">
+  <h1>كل أدواتك في مكان واحد ⚡</h1>
+
+  <p>
+    ZENTRO منصة عالمية للأدوات الرقمية المجانية التي تعمل مباشرة من المتصفح.
+  </p>
+
+  <div class="search-box">
+    <input id="searchInput"
+      placeholder="ابحث عن أداة..."
+      oninput="searchTools()">
+
+    <button onclick="searchTools()">🔍 بحث</button>
+  </div>
+</div>
+
+</div>
 </header>
 
 <main class="container">
 
-  <div class="stats">
+<div class="stats">
+  <div class="stat">
+    <b>12+</b>
+    <span>أداة مجانية</span>
+  </div>
 
-    <div class="stat">
-      <b>100+</b>
-      <span>أداة وخدمة</span>
+  <div class="stat">
+    <b>24/7</b>
+    <span>متاح دائماً</span>
+  </div>
+
+  <div class="stat">
+    <b>🌍</b>
+    <span>عالمي</span>
+  </div>
+
+  <div class="stat">
+    <b>⚡</b>
+    <span>سريع ومجاني</span>
+  </div>
+</div>
+<section class="section">
+
+  <h2>🔥 الأدوات الأساسية</h2>
+  <p class="muted">أدوات مجانية تعمل مباشرة داخل الموقع</p>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">📝</div>
+      <h3>عداد الكلمات</h3>
+      <p>احسب عدد الكلمات والحروف بسرعة.</p>
     </div>
 
-    <div class="stat">
-      <b>15+</b>
-      <span>قسم عالمي</span>
+    <div class="card">
+      <div class="icon">🔐</div>
+      <h3>مولد كلمة مرور</h3>
+      <p>أنشئ كلمة مرور قوية وآمنة.</p>
     </div>
 
-    <div class="stat">
-      <b>24/7</b>
-      <span>متاح دائماً</span>
+    <div class="card">
+      <div class="icon">🧮</div>
+      <h3>آلة حاسبة</h3>
+      <p>قم بالعمليات الحسابية بسرعة.</p>
     </div>
 
-    <div class="stat">
-      <b>🌍</b>
-      <span>حول العالم</span>
+    <div class="card">
+      <div class="icon">🎂</div>
+      <h3>حاسبة العمر</h3>
+      <p>احسب عمرك من تاريخ الميلاد.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎲</div>
+      <h3>رقم عشوائي</h3>
+      <p>إنشاء رقم عشوائي بسرعة.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎨</div>
+      <h3>مولد لون</h3>
+      <p>أنشئ لوناً عشوائياً مع كوده.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">#️⃣</div>
+      <h3>مولد هاشتاغات</h3>
+      <p>أنشئ هاشتاغات حسب الموضوع.</p>
     </div>
 
   </div>
 
-  <section class="section">
+</section>
 
-    <div class="section-head">
-      <div>
-        <h2>🌍 جميع الأقسام</h2>
-        <p>اختر المجال الذي تحتاجه</p>
-      </div>
-    </div>
-
-    <div class="category-list">
-
-      <div class="category">
-        <span>🤖</span>
-        <small>الذكاء الاصطناعي</small>
-      </div>
-
-      <div class="category">
-        <span>📝</span>
-        <small>النصوص والكتابة</small>
-      </div>
-
-      <div class="category">
-        <span>🎨</span>
-        <small>التصميم</small>
-      </div>
-
-      <div class="category">
-        <span>🖼️</span>
-        <small>الصور</small>
-      </div>
-
-      <div class="category">
-        <span>📄</span>
-        <small>الملفات</small>
-      </div>
-
-      <div class="category">
-        <span>🧮</span>
-        <small>الحاسبات</small>
-      </div>
-
-      <div class="category">
-        <span>🔐</span>
-        <small>الأمان</small>
-      </div>
-
-      <div class="category">
-        <span>📱</span>
-        <small>السوشيال ميديا</small>
-      </div>
-
-      <div class="category">
-        <span>💼</span>
-        <small>الأعمال</small>
-      </div>
-
-      <div class="category">
-        <span>🎓</span>
-        <small>التعليم</small>
-      </div>
-
-      <div class="category">
-        <span>🎮</span>
-        <small>الألعاب</small>
-      </div>
-
-      <div class="category">
-        <span>💰</span>
-        <small>المال</small>
-      </div>
-
-    </div>
-
-  </section>
-
-  <div class="ad">
-    📢 مساحة إعلانية رقم 1
-  </div>
-
-  <section class="section">
-
-    <div class="section-head">
-      <div>
-        <h2>🔥 الأدوات الأساسية</h2>
-        <p>أدوات مجانية تعمل مباشرة داخل الموقع</p>
-      </div>
-    </div>
-
-    <div class="grid" id="toolsGrid">
-
-      <div class="tool-card">
-        <div class="tool-icon">📝</div>
-        <h3>عداد الكلمات</h3>
-        <p>احسب الكلمات والحروف بسرعة.</p>
-      </div>
-
-      <div class="tool-card">
-        <div class="tool-icon">🔐</div>
-        <h3>مولد كلمة مرور</h3>
-        <p>إنشاء كلمات مرور قوية وآمنة.</p>
-      </div>
-
-      <div class="tool-card">
-        <div class="tool-icon">🧮</div>
-        <h3>آلة حاسبة</h3>
-        <p>عمليات حسابية سريعة.</p>
-      </div>
-
-      <div class="tool-card">
-        <div class="tool-icon">🎂</div>
-        <h3>حاسبة العمر</h3>
-        <p>احسب عمرك بسهولة.</p>
-      </div>
-
-    </div>
-
-  </section>
-  <div class="ad">
-  📢 مساحة إعلانية رقم 2
+<div class="ad">
+  📢 مساحة إعلانية — سيتم ربط الإعلانات لاحقاً
 </div>
 
 <section class="section">
 
-  <div class="section-head">
-    <div>
-      <h2>⚡ جرب أدوات ZENTRO</h2>
-      <p>أدوات مجانية تعمل مباشرة</p>
-    </div>
-  </div>
+  <h2>⚡ جرب الأدوات</h2>
+  <p class="muted">كل الأدوات تعمل تلقائياً داخل الموقع</p>
 
-  <div class="tool-area">
-
+  <div class="tool-box">
     <h3>📝 عداد الكلمات</h3>
 
     <textarea
@@ -522,34 +405,30 @@ footer{
       oninput="countText()"
     ></textarea>
 
-    <div class="tool-result" id="wordResult">
+    <div class="result" id="wordResult">
       عدد الكلمات: 0 | عدد الحروف: 0
     </div>
-
   </div>
 
-  <div class="tool-area">
+  <div class="tool-box">
+    <h3>🔐 مولد كلمة مرور</h3>
 
-    <h3>🔐 مولد كلمات المرور</h3>
-
-    <div class="tool-buttons">
+    <div class="actions">
       <button class="primary" onclick="generatePassword()">
         إنشاء كلمة مرور
       </button>
 
       <button onclick="copyPassword()">
-        نسخ كلمة المرور
+        نسخ
       </button>
     </div>
 
-    <div class="tool-result" id="passwordResult">
+    <div class="result" id="passwordResult">
       اضغط على إنشاء كلمة مرور
     </div>
-
   </div>
 
-  <div class="tool-area">
-
+  <div class="tool-box">
     <h3>🧮 آلة حاسبة</h3>
 
     <input
@@ -557,78 +436,111 @@ footer{
       placeholder="مثال: 10 + 20 * 2"
     >
 
-    <div class="tool-buttons">
+    <div class="actions">
       <button class="primary" onclick="calculate()">
         احسب
       </button>
     </div>
 
-    <div class="tool-result" id="calcResult">
+    <div class="result" id="calcResult">
       النتيجة ستظهر هنا
     </div>
-
   </div>
 
-  <div class="tool-area">
-
+  <div class="tool-box">
     <h3>🎂 حاسبة العمر</h3>
 
     <input id="birthDate" type="date">
 
-    <div class="tool-buttons">
+    <div class="actions">
       <button class="primary" onclick="calculateAge()">
         احسب العمر
       </button>
     </div>
 
-    <div class="tool-result" id="ageResult">
+    <div class="result" id="ageResult">
       اختر تاريخ ميلادك
     </div>
+  </
+    <section class="section">
 
+  <h2>🚀 أدوات إضافية</h2>
+  <p class="muted">أدوات سريعة ومجانية</p>
+
+  <div class="tool-box">
+    <h3>🎲 مولد رقم عشوائي</h3>
+
+    <div class="actions">
+      <button class="primary" onclick="generateRandomNumber()">
+        إنشاء رقم
+      </button>
+    </div>
+
+    <div class="result" id="randomResult">
+      اضغط لإنشاء رقم عشوائي
+    </div>
+  </div>
+
+  <div class="tool-box">
+    <h3>🎨 مولد لون عشوائي</h3>
+
+    <div class="actions">
+      <button class="primary" onclick="generateColor()">
+        إنشاء لون
+      </button>
+    </div>
+
+    <div class="result" id="colorResult">
+      اضغط لإنشاء لون
+    </div>
+  </div>
+
+  <div class="tool-box">
+    <h3>#️⃣ مولد هاشتاغات</h3>
+
+    <input
+      id="hashtagInput"
+      placeholder="اكتب موضوعاً مثل الألعاب أو السفر"
+    >
+
+    <div class="actions">
+      <button class="primary" onclick="generateHashtags()">
+        إنشاء هاشتاغات
+      </button>
+    </div>
+
+    <div class="result" id="hashtagResult">
+      ستظهر الهاشتاغات هنا
+    </div>
   </div>
 
 </section>
 
 <div class="ad">
-  📢 مساحة إعلانية رقم 3
+  📢 مساحة إعلانية — سيتم تجهيز الربح لاحقاً
 </div>
+
+</main>
+
 <footer>
-  <div class="container">
-
-    <h2>ZENTRO ⚡</h2>
-
-    <p>
-      منصة عالمية للأدوات الرقمية المجانية.
-      نعمل على إضافة أدوات وخدمات جديدة باستمرار.
-    </p>
-
-    <p>
-      🌍 متاح لجميع المستخدمين حول العالم
-    </p>
-
-    <p>
-      © 2026 ZENTRO — جميع الحقوق محفوظة
-    </p>
-
-  </div>
+  <h2>ZENTRO ⚡</h2>
+  <p>منصة عالمية للأدوات الرقمية المجانية.</p>
+  <p>🌍 متاح للمستخدمين حول العالم</p>
+  <p>© 2026 ZENTRO — جميع الحقوق محفوظة</p>
 </footer>
 
 <script>
 
 function countText(){
   const text = document.getElementById("textInput").value.trim();
-
   const words = text ? text.split(/\s+/).length : 0;
-  const chars = text.length;
 
   document.getElementById("wordResult").textContent =
     "عدد الكلمات: " + words +
-    " | عدد الحروف: " + chars;
+    " | عدد الحروف: " + text.length;
 }
 
-
 function generatePassword(){
-
   const chars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
 
@@ -640,37 +552,24 @@ function generatePassword(){
     );
   }
 
-  document.getElementById("passwordResult").textContent =
-    password;
+  document.getElementById("passwordResult").textContent = password;
 }
 
-
 function copyPassword(){
-
   const password =
     document.getElementById("passwordResult").textContent;
 
-  if(
-    password &&
-    password !== "اضغط على إنشاء كلمة مرور"
-  ){
-
+  if(password && password !== "اضغط على إنشاء كلمة مرور"){
     navigator.clipboard.writeText(password);
-
-    alert("تم نسخ كلمة المرور ✅");
-
+    alert("تم النسخ ✅");
   }
-
 }
 
-
 function calculate(){
-
   const input =
     document.getElementById("calcInput").value;
 
   try{
-
     const result = Function(
       '"use strict"; return (' + input + ')'
     )();
@@ -679,31 +578,22 @@ function calculate(){
       "النتيجة: " + result;
 
   }catch(error){
-
     document.getElementById("calcResult").textContent =
-      "⚠️ يرجى كتابة عملية حسابية صحيحة";
-
+      "⚠️ عملية حسابية غير صحيحة";
   }
-
 }
 
-
 function calculateAge(){
-
   const birth =
     document.getElementById("birthDate").value;
 
   if(!birth){
-
     document.getElementById("ageResult").textContent =
       "⚠️ اختر تاريخ ميلادك أولاً";
-
     return;
-
   }
 
   const birthDate = new Date(birth);
-
   const today = new Date();
 
   let age =
@@ -716,129 +606,28 @@ function calculateAge(){
 
   if(
     month < 0 ||
-    (
-      month === 0 &&
-      today.getDate() < birthDate.getDate()
-    )
+    (month === 0 &&
+    today.getDate() < birthDate.getDate())
   ){
     age--;
   }
 
   document.getElementById("ageResult").textContent =
     "عمرك: " + age + " سنة 🎉";
-
 }
 
-
-function toggleDark(){
-
-  document.body.classList.toggle("dark");
-
-}
-
-
-function searchTools(){
-
-  const search =
-    document.getElementById("searchInput")
-    .value
-    .toLowerCase();
-
-  const cards =
-    document.querySelectorAll(".tool-card");
-
-  cards.forEach(function(card){
-
-    const text =
-      card.textContent.toLowerCase();
-
-    if(text.includes(search)){
-      card.style.display = "block";
-    }else{
-      card.style.display = "none";
-          }
-
-  });
-
-}
-
-
-function toggleLanguage(){
-
-  alert(
-    "ميزة تغيير اللغة سيتم تطويرها قريباً 🌍"
-  );
-
-}
-<section class="section">
-
-  <div class="section-head">
-    <div>
-      <h2>🚀 أدوات إضافية</h2>
-      <p>أدوات مجانية جديدة من ZENTRO</p>
-    </div>
-  </div>
-
-  <div class="tool-area">
-    <h3>🔢 مولد رقم عشوائي</h3>
-
-    <div class="tool-buttons">
-      <button class="primary" onclick="generateRandomNumber()">
-        إنشاء رقم عشوائي
-      </button>
-    </div>
-
-    <div class="tool-result" id="randomResult">
-      اضغط لإنشاء رقم
-    </div>
-  </div>
-
-  <div class="tool-area">
-    <h3>🎨 مولد لون عشوائي</h3>
-
-    <div class="tool-buttons">
-      <button class="primary" onclick="generateColor()">
-        إنشاء لون
-      </button>
-    </div>
-
-    <div class="tool-result" id="colorResult">
-      اضغط لإنشاء لون
-    </div>
-  </div>
-
-  <div class="tool-area">
-    <h3>#️⃣ مولد هاشتاغات</h3>
-
-    <input
-      id="hashtagInput"
-      placeholder="اكتب موضوعاً مثل الألعاب أو السفر"
-    >
-
-    <div class="tool-buttons">
-      <button class="primary" onclick="generateHashtags()">
-        إنشاء هاشتاغات
-      </button>
-    </div>
-
-    <div class="tool-result" id="hashtagResult">
-      ستظهر الهاشتاغات هنا
-    </div>
-  </div>
-
-</section>
-</script>
 function generateRandomNumber(){
-  const number = Math.floor(Math.random() * 1000000) + 1;
+  const number =
+    Math.floor(Math.random() * 1000000) + 1;
 
   document.getElementById("randomResult").textContent =
     "🎲 الرقم العشوائي: " + number;
 }
 
-
 function generateColor(){
   const color =
-    "#" + Math.floor(Math.random()*16777215)
+    "#" +
+    Math.floor(Math.random() * 16777215)
     .toString(16)
     .padStart(6,"0");
 
@@ -849,7 +638,6 @@ function generateColor(){
   result.style.background = color;
   result.style.color = "#ffffff";
 }
-
 
 function generateHashtags(){
   const input =
@@ -868,10 +656,36 @@ function generateHashtags(){
   result.textContent =
     "#" + word +
     " #" + word + "2026" +
-    " #" + word + "love" +
     " #" + word + "viral" +
     " #" + word + "trending";
 }
+
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+
+function toggleLanguage(){
+  alert("ميزة تغيير اللغة سيتم تطويرها قريباً 🌍");
+}
+
+function searchTools(){
+  const search =
+    document.getElementById("searchInput")
+    .value
+    .toLowerCase();
+
+  const cards =
+    document.querySelectorAll(".card");
+
+  cards.forEach(function(card){
+    const text = card.textContent.toLowerCase();
+
+    card.style.display =
+      text.includes(search) ? "block" : "none";
+  });
+}
+
+</script>
+
 </body>
-</html>
-   
+  </html>
