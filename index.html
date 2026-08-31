@@ -770,9 +770,108 @@ function toggleLanguage(){
   );
 
 }
+<section class="section">
 
+  <div class="section-head">
+    <div>
+      <h2>🚀 أدوات إضافية</h2>
+      <p>أدوات مجانية جديدة من ZENTRO</p>
+    </div>
+  </div>
+
+  <div class="tool-area">
+    <h3>🔢 مولد رقم عشوائي</h3>
+
+    <div class="tool-buttons">
+      <button class="primary" onclick="generateRandomNumber()">
+        إنشاء رقم عشوائي
+      </button>
+    </div>
+
+    <div class="tool-result" id="randomResult">
+      اضغط لإنشاء رقم
+    </div>
+  </div>
+
+  <div class="tool-area">
+    <h3>🎨 مولد لون عشوائي</h3>
+
+    <div class="tool-buttons">
+      <button class="primary" onclick="generateColor()">
+        إنشاء لون
+      </button>
+    </div>
+
+    <div class="tool-result" id="colorResult">
+      اضغط لإنشاء لون
+    </div>
+  </div>
+
+  <div class="tool-area">
+    <h3>#️⃣ مولد هاشتاغات</h3>
+
+    <input
+      id="hashtagInput"
+      placeholder="اكتب موضوعاً مثل الألعاب أو السفر"
+    >
+
+    <div class="tool-buttons">
+      <button class="primary" onclick="generateHashtags()">
+        إنشاء هاشتاغات
+      </button>
+    </div>
+
+    <div class="tool-result" id="hashtagResult">
+      ستظهر الهاشتاغات هنا
+    </div>
+  </div>
+
+</section>
 </script>
+function generateRandomNumber(){
+  const number = Math.floor(Math.random() * 1000000) + 1;
 
+  document.getElementById("randomResult").textContent =
+    "🎲 الرقم العشوائي: " + number;
+}
+
+
+function generateColor(){
+  const color =
+    "#" + Math.floor(Math.random()*16777215)
+    .toString(16)
+    .padStart(6,"0");
+
+  const result =
+    document.getElementById("colorResult");
+
+  result.textContent = "🎨 اللون: " + color;
+  result.style.background = color;
+  result.style.color = "#ffffff";
+}
+
+
+function generateHashtags(){
+  const input =
+    document.getElementById("hashtagInput").value.trim();
+
+  const result =
+    document.getElementById("hashtagResult");
+
+  if(!input){
+    result.textContent = "⚠️ اكتب موضوعاً أولاً";
+    return;
+  }
+
+  const word = input.replace(/\s+/g,"");
+
+  result.textContent =
+    "#" + word +
+    " #" + word + "2026" +
+    " #" + word + "love" +
+    " #" + word + "viral" +
+    " #" + word + "trending";
+}
 </body>
 </html>
    
