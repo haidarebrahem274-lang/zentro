@@ -571,6 +571,62 @@ footer{
     أدخل عدد الثواني
   </div>
 </div>
+ <div class="tool-box">
+  <h3>📅 حاسبة الأيام بين تاريخين</h3>
+
+  <input id="startDate" type="date">
+  <br><br>
+  <input id="endDate" type="date">
+
+  <div class="actions">
+    <button class="primary" onclick="calculateDays()">
+      احسب الأيام
+    </button>
+  </div>
+
+  <div class="result" id="daysResult">
+    اختر تاريخ البداية والنهاية
+  </div>
+</div>
+
+<div class="tool-box">
+  <h3>🔐 فحص قوة كلمة المرور</h3>
+
+  <input
+    id="strengthInput"
+    type="password"
+    placeholder="اكتب كلمة المرور..."
+  >
+
+  <div class="actions">
+    <button class="primary" onclick="checkPasswordStrength()">
+      فحص كلمة المرور
+    </button>
+  </div>
+
+  <div class="result" id="strengthResult">
+    ستظهر قوة كلمة المرور هنا
+  </div>
+</div>
+
+<div class="tool-box">
+  <h3>👤 مولد اسم مستخدم</h3>
+
+  <input
+    id="usernameInput"
+    placeholder="اكتب اسمك أو كلمة..."
+  >
+
+  <div class="actions">
+    <button class="primary" onclick="generateUsername()">
+      إنشاء أسماء
+    </button>
+  </div>
+
+  <div class="result" id="usernameResult">
+    ستظهر أسماء المستخدمين هنا
+  </div>
+</div>     
 </section>
 
 <div class="ad">
@@ -855,12 +911,97 @@ function startTimer(){
     }
   },1000);
 }
+function calculateDays(){
+  const start =
+    document.getElementById("startDate").value;
 
+  const end =
+    document.getElementById("endDate").value;
+
+  const result =
+    document.getElementById("daysResult");
+
+  if(!start || !end){
+    result.textContent =
+      "⚠️ اختر التاريخين أولاً";
+    return;
+  }
+
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+
+  const difference =
+    Math.abs(endDate - startDate);
+
+  const days =
+    Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+  result.textContent =
+    "📅 الفرق بين التاريخين: " +
+    days + " يوم";
+}
+
+
+function checkPasswordStrength(){
+  const password =
+    document.getElementById("strengthInput").value;
+
+  const result =
+    document.getElementById("strengthResult");
+
+  let score = 0;
+
+  if(password.length >= 8) score++;
+  if(/[A-Z]/.test(password)) score++;
+  if(/[a-z]/.test(password)) score++;
+  if(/[0-9]/.test(password)) score++;
+  if(/[^A-Za-z0-9]/.test(password)) score++;
+
+  if(password.length === 0){
+    result.textContent =
+      "⚠️ اكتب كلمة مرور أولاً";
+  }else if(score <= 2){
+    result.textContent =
+      "🔴 كلمة المرور ضعيفة";
+  }else if(score <= 4){
+    result.textContent =
+      "🟡 كلمة المرور متوسطة";
+  }else{
+    result.textContent =
+      "🟢 كلمة المرور قوية جداً";
+  }
+}
+
+
+function generateUsername(){
+  const input =
+    document.getElementById("usernameInput")
+    .value
+    .trim();
+
+  const result =
+    document.getElementById("usernameResult");
+
+  if(!input){
+    result.textContent =
+      "⚠️ اكتب اسماً أو كلمة أولاً";
+    return;
+  }
+
+  const word =
+    input.replace(/\s+/g,"").toLowerCase();
+
+  const number =
+    Math.floor(Math.random() * 9999) + 1;
+
+  result.textContent =
+    "👤 @" + word +
+    "\n👤 @" + word + number +
+    "\n👤 " + word + "_official" +
+    "\n👤 the_" + word;
+}
 </script>
 
 </body>
 </html>
-</script>
 
-</body>
-</html>
