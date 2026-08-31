@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ZENTRO | منصة الأدوات العالمية</title>
+
+<meta name="description" content="ZENTRO منصة عالمية للأدوات الرقمية المجانية.">
+
+<style>
+:root{
+  --primary:#2563eb;
+  --secondary:#7c3aed;
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+button,input,textarea{
+  font:inherit;
+}
+
+button{
+  border:0;
+  border-radius:12px;
+  padding:12px 16px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.container{
+  width:min(1100px,92%);
+  margin:auto;
+}
+
+header{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+  padding:20px 0 70px;
+}
+
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:900;
+}
+
+.logo span{
+  color:#facc15;
+}
+
+.nav-actions{
+  display:flex;
+  gap:8px;
+}
+
+.btn-light{
+  background:white;
+  color:var(--primary);
+}
+
+.btn-dark{
+  background:#172033;
+  color:white;
+}
+
+.hero{
+  text-align:center;
+  padding-top:65px;
+}
+
+.hero h1{
+  font-size:42px;
+  margin:0;
+}
+
+.hero h1 span{
+  color:#facc15;
+}
+
+.hero p{
+  max-width:700px;
+  margin:18px auto;
+  line-height:1.8;
+}
+
+.search-box{
+  display:flex;
+  max-width:650px;
+  margin:25px auto 0;
+  background:white;
+  padding:7px;
+  border-radius:16px;
+}
+
+.search-box input{
+  flex:1;
+  border:0;
+  outline:0;
+  padding:12px;
+  min-width:0;
+}
+
+.search-box button{
+  background:var(--primary);
+  color:white;
+}
+
+main{
+  padding-bottom:40px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-top:-35px;
+}
+
+.stat{
+  background:var(--card);
+  padding:20px;
+  border-radius:18px;
+  text-align:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.stat b{
+  display:block;
+  font-size:24px;
+  color:var(--primary);
+}
+
+.stat span{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.section{
+  margin-top:40px;
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.section-head h2{
+  margin:0;
+}
+
+.section-head p{
+  color:var(--muted);
+}
+
+.category-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:12px;
+  margin-top:20px;
+}
+
+.category{
+  background:var(--card);
+  padding:18px 10px;
+  border-radius:18px;
+  text-align:center;
+  border:1px solid var(--border);
+}
+
+.category span{
+  display:block;
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.category small{
+  font-weight:bold;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+  margin-top:20px;
+}
+
+.tool-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+}
+
+.tool-icon{
+  font-size:35px;
+}
+
+.tool-card h3{
+  margin:12px 0 8px;
+}
+
+.tool-card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.ad{
+  margin:35px 0;
+  padding:25px;
+  text-align:center;
+  border-radius:18px;
+  border:2px dashed var(--border);
+  color:var(--muted);
+  background:var(--card);
+}
+
+.tool-area{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  margin-top:20px;
+}
+
+.tool-area h3{
+  margin-top:0;
+}
+
+input,textarea{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid var(--border);
+}
+
+textarea{
+  min-height:120px;
+}
+
+.tool-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+
+.primary{
+  background:var(--primary);
+  color:white;
+}
+
+.success{
+  background:#16a34a;
+  color:white;
+}
+
+.tool-result{
+  margin-top:15px;
+  padding:15px;
+  border-radius:12px;
+  background:var(--bg);
+  font-weight:bold;
+  word-break:break-word;
+}
+
+footer{
+  margin-top:60px;
+  padding:40px 20px;
+  background:#111827;
+  color:white;
+  text-align:center;
+}
+
+.dark{
+  --bg:#111827;
+  --card:#1f2937;
+  --text:#ffffff;
+  --muted:#cbd5e1;
+  --border:#374151;
+}
+
+@media(max-width:650px){
+  nav{
+    flex-direction:column;
+  }
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+  <header>
+  <div class="container">
+
+    <nav>
+      <div class="logo">ZEN<span>TRO</span> ⚡</div>
+
+      <div class="nav-actions">
+        <button class="btn-light" onclick="toggleLanguage()">🌍 Language</button>
+        <button class="btn-dark" onclick="toggleDark()">🌙</button>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <h1>كل أدواتك في مكان واحد مع <span>ZENTRO</span> ⚡</h1>
+
+      <p>
+        منصة عالمية تجمع الأدوات الرقمية المجانية والإنتاجية
+        والتعلم والتصميم والحاسبات والخدمات المفيدة.
+      </p>
+
+      <div class="search-box">
+        <input
+          id="searchInput"
+          placeholder="ابحث عن أداة أو خدمة..."
+          oninput="searchTools()"
+        >
+        <button onclick="searchTools()">🔍 بحث</button>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="stats">
+
+    <div class="stat">
+      <b>100+</b>
+      <span>أداة وخدمة</span>
+    </div>
+
+    <div class="stat">
+      <b>15+</b>
+      <span>قسم عالمي</span>
+    </div>
+
+    <div class="stat">
+      <b>24/7</b>
+      <span>متاح دائماً</span>
+    </div>
+
+    <div class="stat">
+      <b>🌍</b>
+      <span>حول العالم</span>
+    </div>
+
+  </div>
+
+  <section class="section">
+
+    <div class="section-head">
+      <div>
+        <h2>🌍 جميع الأقسام</h2>
+        <p>اختر المجال الذي تحتاجه</p>
+      </div>
+    </div>
+
+    <div class="category-list">
+
+      <div class="category">
+        <span>🤖</span>
+        <small>الذكاء الاصطناعي</small>
+      </div>
+
+      <div class="category">
+        <span>📝</span>
+        <small>النصوص والكتابة</small>
+      </div>
+
+      <div class="category">
+        <span>🎨</span>
+        <small>التصميم</small>
+      </div>
+
+      <div class="category">
+        <span>🖼️</span>
+        <small>الصور</small>
+      </div>
+
+      <div class="category">
+        <span>📄</span>
+        <small>الملفات</small>
+      </div>
+
+      <div class="category">
+        <span>🧮</span>
+        <small>الحاسبات</small>
+      </div>
+
+      <div class="category">
+        <span>🔐</span>
+        <small>الأمان</small>
+      </div>
+
+      <div class="category">
+        <span>📱</span>
+        <small>السوشيال ميديا</small>
+      </div>
+
+      <div class="category">
+        <span>💼</span>
+        <small>الأعمال</small>
+      </div>
+
+      <div class="category">
+        <span>🎓</span>
+        <small>التعليم</small>
+      </div>
+
+      <div class="category">
+        <span>🎮</span>
+        <small>الألعاب</small>
+      </div>
+
+      <div class="category">
+        <span>💰</span>
+        <small>المال</small>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="ad">
+    📢 مساحة إعلانية رقم 1
+  </div>
+
+  <section class="section">
+
+    <div class="section-head">
+      <div>
+        <h2>🔥 الأدوات الأساسية</h2>
+        <p>أدوات مجانية تعمل مباشرة داخل الموقع</p>
+      </div>
+    </div>
+
+    <div class="grid" id="toolsGrid">
+
+      <div class="tool-card">
+        <div class="tool-icon">📝</div>
+        <h3>عداد الكلمات</h3>
+        <p>احسب الكلمات والحروف بسرعة.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">🔐</div>
+        <h3>مولد كلمة مرور</h3>
+        <p>إنشاء كلمات مرور قوية وآمنة.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">🧮</div>
+        <h3>آلة حاسبة</h3>
+        <p>عمليات حسابية سريعة.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">🎂</div>
+        <h3>حاسبة العمر</h3>
+        <p>احسب عمرك بسهولة.</p>
+      </div>
+
+    </div>
+
+  </section>
+  <div class="ad">
+  📢 مساحة إعلانية رقم 2
+</div>
+
+<section class="section">
+
+  <div class="section-head">
+    <div>
+      <h2>⚡ جرب أدوات ZENTRO</h2>
+      <p>أدوات مجانية تعمل مباشرة</p>
+    </div>
+  </div>
+
+  <div class="tool-area">
+
+    <h3>📝 عداد الكلمات</h3>
+
+    <textarea
+      id="textInput"
+      placeholder="اكتب أو الصق النص هنا..."
+      oninput="countText()"
+    ></textarea>
+
+    <div class="tool-result" id="wordResult">
+      عدد الكلمات: 0 | عدد الحروف: 0
+    </div>
+
+  </div>
+
+  <div class="tool-area">
+
+    <h3>🔐 مولد كلمات المرور</h3>
+
+    <div class="tool-buttons">
+      <button class="primary" onclick="generatePassword()">
+        إنشاء كلمة مرور
+      </button>
+
+      <button onclick="copyPassword()">
+        نسخ كلمة المرور
+      </button>
+    </div>
+
+    <div class="tool-result" id="passwordResult">
+      اضغط على إنشاء كلمة مرور
+    </div>
+
+  </div>
+
+  <div class="tool-area">
+
+    <h3>🧮 آلة حاسبة</h3>
+
+    <input
+      id="calcInput"
+      placeholder="مثال: 10 + 20 * 2"
+    >
+
+    <div class="tool-buttons">
+      <button class="primary" onclick="calculate()">
+        احسب
+      </button>
+    </div>
+
+    <div class="tool-result" id="calcResult">
+      النتيجة ستظهر هنا
+    </div>
+
+  </div>
+
+  <div class="tool-area">
+
+    <h3>🎂 حاسبة العمر</h3>
+
+    <input id="birthDate" type="date">
+
+    <div class="tool-buttons">
+      <button class="primary" onclick="calculateAge()">
+        احسب العمر
+      </button>
+    </div>
+
+    <div class="tool-result" id="ageResult">
+      اختر تاريخ ميلادك
+    </div>
+
+  </div>
+
+</section>
+
+<div class="ad">
+  📢 مساحة إعلانية رقم 3
+</div>
+<footer>
+  <div class="container">
+
+    <h2>ZENTRO ⚡</h2>
+
+    <p>
+      منصة عالمية للأدوات الرقمية المجانية.
+      نعمل على إضافة أدوات وخدمات جديدة باستمرار.
+    </p>
+
+    <p>
+      🌍 متاح لجميع المستخدمين حول العالم
+    </p>
+
+    <p>
+      © 2026 ZENTRO — جميع الحقوق محفوظة
+    </p>
+
+  </div>
+</footer>
+
+<script>
+
+function countText(){
+  const text = document.getElementById("textInput").value.trim();
+
+  const words = text ? text.split(/\s+/).length : 0;
+  const chars = text.length;
+
+  document.getElementById("wordResult").textContent =
+    "عدد الكلمات: " + words +
+    " | عدد الحروف: " + chars;
+}
+
+
+function generatePassword(){
+
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+
+  let password = "";
+
+  for(let i = 0; i < 12; i++){
+    password += chars.charAt(
+      Math.floor(Math.random() * chars.length)
+    );
+  }
+
+  document.getElementById("passwordResult").textContent =
+    password;
+}
+
+
+function copyPassword(){
+
+  const password =
+    document.getElementById("passwordResult").textContent;
+
+  if(
+    password &&
+    password !== "اضغط على إنشاء كلمة مرور"
+  ){
+
+    navigator.clipboard.writeText(password);
+
+    alert("تم نسخ كلمة المرور ✅");
+
+  }
+
+}
+
+
+function calculate(){
+
+  const input =
+    document.getElementById("calcInput").value;
+
+  try{
+
+    const result = Function(
+      '"use strict"; return (' + input + ')'
+    )();
+
+    document.getElementById("calcResult").textContent =
+      "النتيجة: " + result;
+
+  }catch(error){
+
+    document.getElementById("calcResult").textContent =
+      "⚠️ يرجى كتابة عملية حسابية صحيحة";
+
+  }
+
+}
+
+
+function calculateAge(){
+
+  const birth =
+    document.getElementById("birthDate").value;
+
+  if(!birth){
+
+    document.getElementById("ageResult").textContent =
+      "⚠️ اختر تاريخ ميلادك أولاً";
+
+    return;
+
+  }
+
+  const birthDate = new Date(birth);
+
+  const today = new Date();
+
+  let age =
+    today.getFullYear() -
+    birthDate.getFullYear();
+
+  const month =
+    today.getMonth() -
+    birthDate.getMonth();
+
+  if(
+    month < 0 ||
+    (
+      month === 0 &&
+      today.getDate() < birthDate.getDate()
+    )
+  ){
+    age--;
+  }
+
+  document.getElementById("ageResult").textContent =
+    "عمرك: " + age + " سنة 🎉";
+
+}
+
+
+function toggleDark(){
+
+  document.body.classList.toggle("dark");
+
+}
+
+
+function searchTools(){
+
+  const search =
+    document.getElementById("searchInput")
+    .value
+    .toLowerCase();
+
+  const cards =
+    document.querySelectorAll(".tool-card");
+
+  cards.forEach(function(card){
+
+    const text =
+      card.textContent.toLowerCase();
+
+    if(text.includes(search)){
+      card.style.display = "block";
+    }else{
+      card.style.display = "none";
+          }
+
+  });
+
+}
+
+
+function toggleLanguage(){
+
+  alert(
+    "ميزة تغيير اللغة سيتم تطويرها قريباً 🌍"
+  );
+
+}
+
+</script>
+
+</body>
+</html>
+   
