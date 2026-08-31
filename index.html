@@ -667,7 +667,6 @@ function toggleDark(){
 function toggleLanguage(){
   alert("ميزة تغيير اللغة سيتم تطويرها قريباً 🌍");
 }
-
 function searchTools(){
   const search =
     document.getElementById("searchInput")
@@ -685,7 +684,49 @@ function searchTools(){
   });
 }
 
+function generateRandomNumber(){
+  const number = Math.floor(Math.random() * 1000000) + 1;
+
+  document.getElementById("randomResult").textContent =
+    "🎲 الرقم العشوائي: " + number;
+}
+
+function generateColor(){
+  const color =
+    "#" + Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6,"0");
+
+  const result =
+    document.getElementById("colorResult");
+
+  result.textContent = "🎨 اللون: " + color;
+  result.style.background = color;
+  result.style.color = "#ffffff";
+}
+
+function generateHashtags(){
+  const input =
+    document.getElementById("hashtagInput").value.trim();
+
+  const result =
+    document.getElementById("hashtagResult");
+
+  if(!input){
+    result.textContent = "⚠️ اكتب موضوعاً أولاً";
+    return;
+  }
+
+  const word = input.replace(/\s+/g,"");
+
+  result.textContent =
+    "#" + word +
+    " #" + word + "2026" +
+    " #" + word + "viral" +
+    " #" + word + "trending";
+}
+
 </script>
 
 </body>
-  </html>
+</html>
