@@ -513,7 +513,64 @@ footer{
       ستظهر الهاشتاغات هنا
     </div>
   </div>
+<div class="tool-box">
+  <h3>🔤 تحويل النص</h3>
 
+  <textarea id="caseInput"
+    placeholder="اكتب النص هنا..."></textarea>
+
+  <div class="actions">
+    <button class="primary" onclick="toUpper()">
+      أحرف كبيرة
+    </button>
+
+    <button onclick="toLower()">
+      أحرف صغيرة
+    </button>
+  </div>
+
+  <div class="result" id="caseResult">
+    ستظهر النتيجة هنا
+  </div>
+</div>
+
+<div class="tool-box">
+  <h3>🔗 مولد رابط واتساب</h3>
+
+  <input id="whatsappNumber"
+    placeholder="مثال: 9639XXXXXXXX">
+
+  <textarea id="whatsappMessage"
+    placeholder="اكتب الرسالة..."></textarea>
+
+  <div class="actions">
+    <button class="primary" onclick="generateWhatsAppLink()">
+      إنشاء الرابط
+    </button>
+  </div>
+
+  <div class="result" id="whatsappResult">
+    سيظهر الرابط هنا
+  </div>
+</div>
+
+<div class="tool-box">
+  <h3>⏱️ مؤقت</h3>
+
+  <input id="timerSeconds"
+    type="number"
+    placeholder="عدد الثواني">
+
+  <div class="actions">
+    <button class="primary" onclick="startTimer()">
+      بدء المؤقت
+    </button>
+  </div>
+
+  <div class="result" id="timerResult">
+    أدخل عدد الثواني
+  </div>
+</div>
 </section>
 
 <div class="ad">
@@ -725,7 +782,84 @@ function generateHashtags(){
     " #" + word + "viral" +
     " #" + word + "trending";
 }
+}
 
+function toUpper(){
+  const text =
+    document.getElementById("caseInput").value;
+
+  document.getElementById("caseResult").textContent =
+    text.toUpperCase();
+}
+
+function toLower(){
+  const text =
+    document.getElementById("caseInput").value;
+
+  document.getElementById("caseResult").textContent =
+    text.toLowerCase();
+}
+
+function generateWhatsAppLink(){
+  const number =
+    document.getElementById("whatsappNumber").value.replace(/\D/g,"");
+
+  const message =
+    document.getElementById("whatsappMessage").value;
+
+  const result =
+    document.getElementById("whatsappResult");
+
+  if(!number){
+    result.textContent = "⚠️ اكتب رقم الهاتف أولاً";
+    return;
+  }
+
+  const link =
+    "https://wa.me/" + number +
+    "?text=" + encodeURIComponent(message);
+
+  result.innerHTML =
+    '<a href="' + link + '" target="_blank">📱 فتح محادثة واتساب</a>';
+}
+
+let timerInterval;
+
+function startTimer(){
+  let seconds = parseInt(
+    document.getElementById("timerSeconds").value
+  );
+
+  const result =
+    document.getElementById("timerResult");
+
+  if(!seconds || seconds < 1){
+    result.textContent = "⚠️ أدخل عدد ثوانٍ صحيح";
+    return;
+  }
+
+  clearInterval(timerInterval);
+
+  result.textContent =
+    "⏱️ الوقت المتبقي: " + seconds + " ثانية";
+
+  timerInterval = setInterval(function(){
+    seconds--;
+
+    result.textContent =
+      "⏱️ الوقت المتبقي: " + seconds + " ثانية";
+
+    if(seconds <= 0){
+      clearInterval(timerInterval);
+      result.textContent = "🎉 انتهى الوقت!";
+    }
+  },1000);
+}
+
+</script>
+
+</body>
+</html>
 </script>
 
 </body>
