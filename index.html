@@ -1543,8 +1543,6 @@ function calculateSalary(){
   result.textContent =
     "👥 الراتب النهائي: " + total.toFixed(2);
 }
-
-
 function calculateVAT(){
   const price =
     parseFloat(document.getElementById("vatPrice").value);
@@ -1552,9 +1550,99 @@ function calculateVAT(){
   const rate =
     parseFloat(document.getElementById("vatRate").value);
 
-  const result = document.getElementById("vatResult");
+  const result =
+    document.getElementById("vatResult");
 
-  if(isNaN(price) || is 
+  if(isNaN(price) || isNaN(rate)){
+    result.textContent =
+      "⚠️ أدخل السعر ونسبة الضريبة";
+    return;
+  }
+
+  const vat = price * rate / 100;
+  const total = price + vat;
+
+  result.textContent =
+    "🧾 قيمة الضريبة: " + vat.toFixed(2) +
+    " | 💰 الإجمالي: " + total.toFixed(2);
+}
+
+
+function generateQuote(){
+  const client =
+    document.getElementById("quoteClient").value.trim();
+
+  const service =
+    document.getElementById("quoteService").value.trim();
+
+  const price =
+    document.getElementById("quotePrice").value;
+
+  const result =
+    document.getElementById("quoteResult");
+
+  if(!client || !service || !price){
+    result.textContent =
+      "⚠️ أدخل جميع البيانات";
+    return;
+  }
+
+  result.textContent =
+    "📝 عرض سعر\n" +
+    "👤 العميل: " + client +
+    "\n📦 المنتج/الخدمة: " + service +
+    "\n💰 السعر: " + price;
+}
+
+
+function calculateLoan(){
+  const amount =
+    parseFloat(document.getElementById("loanAmount").value);
+
+  const annualRate =
+    parseFloat(document.getElementById("loanRate").value);
+
+  const months =
+    parseInt(document.getElementById("loanMonths").value);
+
+  const result =
+    document.getElementById("loanResult");
+
+  if(
+    isNaN(amount) ||
+    isNaN(annualRate) ||
+    isNaN(months) ||
+    amount <= 0 ||
+    months <= 0
+  ){
+    result.textContent =
+      "⚠️ أدخل بيانات القرض بشكل صحيح";
+    return;
+  }
+
+  const monthlyRate =
+    annualRate / 100 / 12;
+
+  let monthlyPayment;
+
+  if(monthlyRate === 0){
+    monthlyPayment = amount / months;
+  }else{
+    monthlyPayment =
+      amount *
+      (monthlyRate * Math.pow(1 + monthlyRate, months)) /
+      (Math.pow(1 + monthlyRate, months) - 1);
+  }
+
+  const total =
+    monthlyPayment * months;
+
+  result.textContent =
+    "🏦 القسط الشهري: " +
+    monthlyPayment.toFixed(2) +
+    " | 💰 إجمالي السداد: " +
+    total.toFixed(2);
+    }
 </script>
 
 </body>
