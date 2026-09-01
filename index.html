@@ -683,6 +683,39 @@ footer{
     أدخل السعر ونسبة الخصم
   </div>
   </div>
+  <div class="tool-box">
+  <h3>📄 مولد فاتورة بسيطة</h3>
+
+  <input
+    id="invoiceName"
+    placeholder="اسم العميل"
+  >
+
+  <br><br>
+
+  <input
+    id="invoiceItem"
+    placeholder="اسم المنتج أو الخدمة"
+  >
+
+  <br><br>
+
+  <input
+    id="invoicePrice"
+    type="number"
+    placeholder="السعر"
+  >
+
+  <div class="actions">
+    <button class="primary" onclick="generateInvoice()">
+      إنشاء الفاتورة
+    </button>
+  </div>
+
+  <div class="result" id="invoiceResult">
+    أدخل بيانات الفاتورة
+  </div>
+  </div>
 </section>
 
 <div class="ad">
@@ -1106,6 +1139,31 @@ function generateUsername(){
     "🏷️ قيمة الخصم: " + discount.toFixed(2) +
     " | 💰 السعر بعد الخصم: " +
     finalPrice.toFixed(2);
+  }
+  function generateInvoice(){
+  const name =
+    document.getElementById("invoiceName").value.trim();
+
+  const item =
+    document.getElementById("invoiceItem").value.trim();
+
+  const price =
+    document.getElementById("invoicePrice").value;
+
+  const result =
+    document.getElementById("invoiceResult");
+
+  if(!name || !item || !price){
+    result.textContent =
+      "⚠️ أدخل جميع بيانات الفاتورة";
+    return;
+  }
+
+  result.innerHTML =
+    "📄 فاتورة ZENTRO<br><br>" +
+    "👤 العميل: " + name + "<br>" +
+    "📦 المنتج/الخدمة: " + item + "<br>" +
+    "💰 السعر: " + price;
   }
 </script>
 
