@@ -656,6 +656,33 @@ footer{
     أدخل سعر التكلفة وسعر البيع
   </div>
   </div>
+  <div class="tool-box">
+  <h3>🏷️ حاسبة الخصم</h3>
+
+  <input
+    id="discountPrice"
+    type="number"
+    placeholder="السعر الأصلي"
+  >
+
+  <br><br>
+
+  <input
+    id="discountPercent"
+    type="number"
+    placeholder="نسبة الخصم %"
+  >
+
+  <div class="actions">
+    <button class="primary" onclick="calculateDiscount()">
+      احسب الخصم
+    </button>
+  </div>
+
+  <div class="result" id="discountResult">
+    أدخل السعر ونسبة الخصم
+  </div>
+  </div>
 </section>
 
 <div class="ad">
@@ -1053,6 +1080,33 @@ function generateUsername(){
     "💰 الربح: " + profit +
     " | 📊 نسبة الربح: " + margin + "%";
 }
+  function calculateDiscount(){
+  const price =
+    parseFloat(document.getElementById("discountPrice").value);
+
+  const percent =
+    parseFloat(document.getElementById("discountPercent").value);
+
+  const result =
+    document.getElementById("discountResult");
+
+  if(isNaN(price) || isNaN(percent)){
+    result.textContent =
+      "⚠️ أدخل السعر ونسبة الخصم";
+    return;
+  }
+
+  const discount =
+    price * percent / 100;
+
+  const finalPrice =
+    price - discount;
+
+  result.textContent =
+    "🏷️ قيمة الخصم: " + discount.toFixed(2) +
+    " | 💰 السعر بعد الخصم: " +
+    finalPrice.toFixed(2);
+  }
 </script>
 
 </body>
