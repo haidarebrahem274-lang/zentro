@@ -2055,6 +2055,26 @@ function convertImage(){
 
   reader.readAsDataURL(file);
   } 
+  function searchTools(){
+  const input =
+    document.getElementById("searchInput").value
+    .toLowerCase()
+    .trim();
+
+  const tools =
+    document.querySelectorAll(".tool-box");
+
+  tools.forEach(function(tool){
+    const text =
+      tool.textContent.toLowerCase();
+
+    if(text.includes(input)){
+      tool.style.display = "";
+    }else{
+      tool.style.display = "none";
+    }
+  });
+  }
 </script>
 
 </body>
