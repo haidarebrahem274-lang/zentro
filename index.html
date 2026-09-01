@@ -921,7 +921,190 @@ footer{
   </div>
 </div>
 </section>
+<div class="tool-box">
+  <h3>📐 محول الوحدات</h3>
+  <input id="unitValue" type="number" placeholder="أدخل القيمة">
 
+  <select id="unitType">
+    <option value="kmToM">كيلومتر إلى متر</option>
+    <option value="mToKm">متر إلى كيلومتر</option>
+    <option value="kgToG">كيلوغرام إلى غرام</option>
+    <option value="gToKg">غرام إلى كيلوغرام</option>
+    <option value="cToF">مئوية إلى فهرنهايت</option>
+    <option value="fToC">فهرنهايت إلى مئوية</option>
+  </select>
+
+  <div class="actions">
+    <button class="primary" onclick="convertUnit()">
+      تحويل
+    </button>
+  </div>
+
+  <div class="result" id="unitResult">
+    أدخل القيمة واختر التحويل
+  </div>
+</div>
+
+
+<div class="tool-box">
+  <h3>📋 منظم النصوص</h3>
+
+  <textarea id="cleanText" placeholder="اكتب أو الصق النص هنا..."></textarea>
+
+  <div class="actions">
+    <button class="primary" onclick="cleanText()">
+      تنظيم النص
+    </button>
+  </div>
+
+  <div class="result" id="cleanTextResult">
+    ستظهر النتيجة هنا
+  </div>
+</div>
+
+
+<div class="tool-box">
+  <h3>🔗 مولد QR Code</h3>
+
+  <input id="qrText" placeholder="اكتب رابطاً أو نصاً">
+
+  <div class="actions">
+    <button class="primary" onclick="generateQR()">
+      إنشاء QR
+    </button>
+  </div>
+
+  <div class="result" id="qrResult">
+    أدخل النص أو الرابط
+  </div>
+</div>
+
+
+<div class="tool-box">
+  <h3>🕒 الوقت العالمي</h3>
+
+  <select id="worldCity">
+    <option value="Asia/Damascus">دمشق</option>
+    <option value="Asia/Riyadh">الرياض</option>
+    <option value="Asia/Dubai">دبي</option>
+    <option value="Europe/London">لندن</option>
+    <option value="America/New_York">نيويورك</option>
+  </select>
+
+  <div class="actions">
+    <button class="primary" onclick="showWorldTime()">
+      عرض الوقت
+    </button>
+  </div>
+
+  <div class="result" id="worldTimeResult">
+    اختر مدينة
+  </div>
+</div>
+
+
+<div class="tool-box">
+  <h3>📅 حاسبة التاريخ</h3>
+
+  <input id="dateStart" type="date">
+  <input id="dateEnd" type="date">
+
+  <div class="actions">
+    <button class="primary" onclick="calculateDateDifference()">
+      احسب الفرق
+    </button>
+  </div>
+
+  <div class="result" id="dateDifferenceResult">
+    اختر تاريخين
+  </div>
+</div>
+
+
+<div class="tool-box">
+  <h3>📝 مولد سيرة ذاتية بسيطة</h3>
+
+  <input id="cvName" placeholder="الاسم الكامل">
+  <input id="cvJob" placeholder="المهنة أو التخصص">
+
+  <textarea id="cvSkills" placeholder="المهارات"></textarea>
+
+  <textarea id="cvExperience" placeholder="الخبرات"></textarea>
+
+  <div class="actions">
+    <button class="primary" onclick="generateCV()">
+      إنشاء السيرة الذاتية
+    </button>
+  </div>
+
+  <div class="result" id="cvResult">
+    أدخل بياناتك لإنشاء السيرة الذاتية
+  </div>
+</div>
+
+
+<div class="tool-box">
+  <h3>🔒 تشفير وفك تشفير نص بسيط</h3>
+
+  <textarea id="cryptoText" placeholder="اكتب النص هنا..."></textarea>
+
+  <div class="actions">
+    <button class="primary" onclick="encodeText()">
+      تشفير
+    </button>
+
+    <button class="primary" onclick="decodeText()">
+      فك التشفير
+    </button>
+  </div>
+
+  <div class="result" id="cryptoResult">
+    ستظهر النتيجة هنا
+  </div>
+</div>
+
+
+<div class="tool-box">
+  <h3>📱 مولد رابط Telegram</h3>
+
+  <input id="telegramUser" placeholder="اسم المستخدم بدون @">
+
+  <div class="actions">
+    <button class="primary" onclick="generateTelegramLink()">
+      إنشاء الرابط
+    </button>
+  </div>
+
+  <div class="result" id="telegramResult">
+    أدخل اسم المستخدم
+  </div>
+</div>
+
+
+<div class="tool-box">
+  <h3>🖼️ تحويل الصور PNG / JPG</h3>
+
+  <input
+    id="imageInput"
+    type="file"
+    accept="image/png,image/jpeg"
+  >
+
+  <select id="imageFormat">
+    <option value="image/png">تحويل إلى PNG</option>
+    <option value="image/jpeg">تحويل إلى JPG</option>
+  </select>
+
+  <div class="actions">
+    <button class="primary" onclick="convertImage()">
+      تحويل الصورة
+    </button>
+  </div>
+
+  <div class="result" id="imageResult">
+    اختر صورة للتحويل
+  </div>
+</div>
 <div class="ad">
   📢 مساحة إعلانية — سيتم تجهيز الربح لاحقاً
 </div>
@@ -1643,6 +1826,235 @@ function calculateLoan(){
     " | 💰 إجمالي السداد: " +
     total.toFixed(2);
     }
+ function convertUnit(){
+  const value = parseFloat(document.getElementById("unitValue").value);
+  const type = document.getElementById("unitType").value;
+  const result = document.getElementById("unitResult");
+
+  if(isNaN(value)){
+    result.textContent = "⚠️ أدخل قيمة صحيحة";
+    return;
+  }
+
+  let output = "";
+
+  if(type === "kmToM") output = value * 1000 + " متر";
+  if(type === "mToKm") output = value / 1000 + " كيلومتر";
+  if(type === "kgToG") output = value * 1000 + " غرام";
+  if(type === "gToKg") output = value / 1000 + " كيلوغرام";
+  if(type === "cToF") output = (value * 9 / 5 + 32).toFixed(2) + " °F";
+  if(type === "fToC") output = ((value - 32) * 5 / 9).toFixed(2) + " °C";
+
+  result.textContent = "📐 النتيجة: " + output;
+}
+
+
+function cleanText(){
+  const text = document.getElementById("cleanText").value;
+  const result = document.getElementById("cleanTextResult");
+
+  const cleaned = text.replace(/\s+/g, " ").trim();
+
+  result.textContent =
+    cleaned || "⚠️ اكتب نصاً أولاً";
+}
+
+
+function generateQR(){
+  const text = document.getElementById("qrText").value.trim();
+  const result = document.getElementById("qrResult");
+
+  if(!text){
+    result.textContent = "⚠️ أدخل نصاً أو رابطاً";
+    return;
+  }
+
+  result.innerHTML =
+    '<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' +
+    encodeURIComponent(text) +
+    '" alt="QR Code">';
+}
+
+
+function showWorldTime(){
+  const zone = document.getElementById("worldCity").value;
+
+  const time = new Date().toLocaleString("ar-EG", {
+    timeZone: zone,
+    dateStyle: "full",
+    timeStyle: "medium"
+  });
+
+  document.getElementById("worldTimeResult").textContent =
+    "🕒 " + time;
+}
+
+
+function calculateDateDifference(){
+  const start = document.getElementById("dateStart").value;
+  const end = document.getElementById("dateEnd").value;
+  const result = document.getElementById("dateDifferenceResult");
+
+  if(!start || !end){
+    result.textContent = "⚠️ اختر التاريخين";
+    return;
+  }
+
+  const difference =
+    Math.abs(new Date(end) - new Date(start)) /
+    (1000 * 60 * 60 * 24);
+
+  result.textContent =
+    "📅 الفرق: " + Math.round(difference) + " يوم";
+}
+
+
+function generateCV(){
+  const name = document.getElementById("cvName").value.trim();
+  const job = document.getElementById("cvJob").value.trim();
+  const skills = document.getElementById("cvSkills").value.trim();
+  const experience =
+    document.getElementById("cvExperience").value.trim();
+
+  const result = document.getElementById("cvResult");
+
+  if(!name || !job){
+    result.textContent = "⚠️ أدخل الاسم والمهنة على الأقل";
+    return;
+  }
+
+  result.textContent =
+    "📝 السيرة الذاتية\n\n" +
+    "👤 الاسم: " + name +
+    "\n💼 التخصص: " + job +
+    "\n⭐ المهارات: " + skills +
+    "\n📌 الخبرات: " + experience;
+}
+
+
+function encodeText(){
+  const text = document.getElementById("cryptoText").value;
+  const result = document.getElementById("cryptoResult");
+
+  if(!text){
+    result.textContent = "⚠️ اكتب نصاً أولاً";
+    return;
+  }
+
+  result.textContent =
+    btoa(unescape(encodeURIComponent(text)));
+}
+
+
+function decodeText(){
+  const text = document.getElementById("cryptoText").value;
+  const result = document.getElementById("cryptoResult");
+
+  try{
+    result.textContent =
+      decodeURIComponent(escape(atob(text)));
+  }catch(error){
+    result.textContent =
+      "⚠️ النص المشفر غير صحيح";
+  }
+}
+
+
+function generateTelegramLink(){
+  const username =
+    document.getElementById("telegramUser")
+    .value.trim()
+    .replace("@", "");
+
+  const result =
+    document.getElementById("telegramResult");
+
+  if(!username){
+    result.textContent =
+      "⚠️ أدخل اسم المستخدم";
+    return;
+  }
+
+  const link =
+    "https://t.me/" +
+    encodeURIComponent(username);
+
+  result.innerHTML =
+    '<a href="' + link +
+    '" target="_blank">📱 فتح رابط Telegram</a>';
+}
+
+
+function convertImage(){
+  const file =
+    document.getElementById("imageInput").files[0];
+
+  const format =
+    document.getElementById("imageFormat").value;
+
+  const result =
+    document.getElementById("imageResult");
+
+  if(!file){
+    result.textContent =
+      "⚠️ اختر صورة أولاً";
+    return;
+  }
+
+  const image = new Image();
+  const reader = new FileReader();
+
+  reader.onload = function(event){
+
+    image.onload = function(){
+
+      const canvas =
+        document.createElement("canvas");
+
+      canvas.width = image.width;
+      canvas.height = image.height;
+
+      const ctx =
+        canvas.getContext("2d");
+
+      if(format === "image/jpeg"){
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+      }
+
+      ctx.drawImage(image, 0, 0);
+
+      const extension =
+        format === "image/png"
+        ? "png"
+        : "jpg";
+
+      const link =
+        document.createElement("a");
+
+      link.href =
+        canvas.toDataURL(format, 0.92);
+
+      link.download =
+        "zentro-image." + extension;
+
+      link.textContent =
+        "⬇️ حفظ الصورة المحولة";
+
+      result.innerHTML = "";
+      result.appendChild(link);
+    };
+
+    image.src = event.target.result;
+  };
+
+  reader.readAsDataURL(file);
+  } 
 </script>
 
 </body>
