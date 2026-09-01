@@ -628,7 +628,34 @@ footer{
   <div class="result" id="usernameResult">
     ستظهر أسماء المستخدمين هنا
   </div>
-</div>     
+</div> 
+  <div class="tool-box">
+  <h3>💰 حاسبة هامش الربح</h3>
+
+  <input
+    id="costPrice"
+    type="number"
+    placeholder="سعر التكلفة"
+  >
+
+  <br><br>
+
+  <input
+    id="sellPrice"
+    type="number"
+    placeholder="سعر البيع"
+  >
+
+  <div class="actions">
+    <button class="primary" onclick="calculateProfit()">
+      احسب الربح
+    </button>
+  </div>
+
+  <div class="result" id="profitResult">
+    أدخل سعر التكلفة وسعر البيع
+  </div>
+  </div>
 </section>
 
 <div class="ad">
@@ -1000,6 +1027,31 @@ function generateUsername(){
     "\n👤 @" + word + number +
     "\n👤 " + word + "_official" +
     "\n👤 the_" + word;
+}function calculateProfit(){
+  const cost =
+    parseFloat(document.getElementById("costPrice").value);
+
+  const sell =
+    parseFloat(document.getElementById("sellPrice").value);
+
+  const result =
+    document.getElementById("profitResult");
+
+  if(isNaN(cost) || isNaN(sell)){
+    result.textContent =
+      "⚠️ أدخل سعر التكلفة وسعر البيع";
+    return;
+  }
+
+  const profit = sell - cost;
+
+  const margin = cost > 0
+    ? ((profit / cost) * 100).toFixed(2)
+    : 0;
+
+  result.textContent =
+    "💰 الربح: " + profit +
+    " | 📊 نسبة الربح: " + margin + "%";
 }
 </script>
 
