@@ -716,6 +716,104 @@ footer{
     أدخل بيانات الفاتورة
   </div>
   </div>
+  <div class="tool-box">
+  <h3>💱 محول العملات</h3>
+
+  <input id="currencyAmount" type="number"
+    placeholder="المبلغ بالدولار USD">
+
+  <select id="currencySelect">
+    <option value="EUR">🇪🇺 يورو EUR</option>
+    <option value="TRY">🇹🇷 ليرة تركية TRY</option>
+    <option value="AED">🇦🇪 درهم إماراتي AED</option>
+    <option value="SAR">🇸🇦 ريال سعودي SAR</option>
+    <option value="GBP">🇬🇧 جنيه إسترليني GBP</option>
+  </select>
+
+  <div class="actions">
+    <button class="primary" onclick="convertCurrency()">
+      تحويل العملة
+    </button>
+  </div>
+
+  <div class="result" id="currencyResult">
+    أدخل المبلغ واختر العملة
+  </div>
+</div>
+
+
+<div class="tool-box">
+  <h3>🧾 حاسبة الضريبة</h3>
+
+  <input id="taxPrice" type="number"
+    placeholder="السعر قبل الضريبة">
+
+  <br><br>
+
+  <input id="taxRate" type="number"
+    placeholder="نسبة الضريبة %">
+
+  <div class="actions">
+    <button class="primary" onclick="calculateTax()">
+      احسب الضريبة
+    </button>
+  </div>
+
+  <div class="result" id="taxResult">
+    أدخل السعر ونسبة الضريبة
+  </div>
+</div>
+
+
+<div class="tool-box">
+  <h3>📊 حاسبة نقطة التعادل</h3>
+
+  <input id="fixedCosts" type="number"
+    placeholder="التكاليف الثابتة">
+
+  <br><br>
+
+  <input id="sellingPrice" type="number"
+    placeholder="سعر بيع الوحدة">
+
+  <br><br>
+
+  <input id="variableCost" type="number"
+    placeholder="تكلفة الوحدة">
+
+  <div class="actions">
+    <button class="primary" onclick="calculateBreakEven()">
+      احسب نقطة التعادل
+    </button>
+  </div>
+
+  <div class="result" id="breakEvenResult">
+    أدخل بيانات المشروع
+  </div>
+</div>
+
+
+<div class="tool-box">
+  <h3>💵 حاسبة الربح والخسارة</h3>
+
+  <input id="revenue" type="number"
+    placeholder="إجمالي الإيرادات">
+
+  <br><br>
+
+  <input id="expenses" type="number"
+    placeholder="إجمالي المصاريف">
+
+  <div class="actions">
+    <button class="primary" onclick="calculateBusinessProfit()">
+      احسب النتيجة
+    </button>
+  </div>
+
+  <div class="result" id="businessProfitResult">
+    أدخل الإيرادات والمصاريف
+  </div>
+</div>
 </section>
 
 <div class="ad">
@@ -1165,6 +1263,138 @@ function generateUsername(){
     "📦 المنتج/الخدمة: " + item + "<br>" +
     "💰 السعر: " + price;
   }
+ async function convertCurrency(){
+  const amount = parseFloat(
+    document.getElementById("currencyAmount").value
+  );
+
+  const target =
+    document.getElementById("currencySelect").value;
+
+  const result =
+    document.getElementById("currencyResult");
+
+  if(isNaN(amount) || amount <= 0){
+    result.textContent = "⚠️ أدخل مبلغاً صحيحاً";
+    return;
+  }
+
+  result.textContent = "⏳ جاري جلب سعر الصرف...";
+
+  try{
+    const response = await fetch(
+      "https://api.frankfurter.dev/v2/rate/USD/" + target
+    );
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error("API Error");
+    }
+
+    const converted = amount * data.rate;
+
+    result.textContent =
+      "💱 " + amount + " USD = " +
+      converted.toFixed(2) + " " + target;
+
+  }catch(error){
+    result.textContent =
+      "⚠️ تعذر جلب سعر الصرف";
+  }
+}
+
+function calculateTax(){
+  const price = parseFloat(
+    document.getElementById("taxPrice").value
+  );
+
+  const rate = parseFloat(
+    document.getElementById("taxRate").value
+  );
+
+  const result =
+    document.getElementById("taxResult");
+
+  if(isNaN(price) || isNaN(rate)){
+    result.textContent =
+      "⚠️ أدخل السعر ونسبة الضريبة";
+    return;
+  }
+
+  const tax = price * rate / 100;
+  const total = price + tax;
+
+  result.textContent =
+    "🧾 قيمة الضريبة: " + tax.toFixed(2) +
+    " | 💰 السعر النهائي: " + total.toFixed(2);
+}
+
+function calculateBreakEven(){
+  const fixed = parseFloat(
+    document.getElementById("fixedCosts").value
+  );
+
+  const price = parseFloat(
+    document.getElementById("sellingPrice").value
+  );
+
+  const variable = parseFloat(
+    document.getElementById("variableCost").value
+  );
+
+  const result =
+    document.getElementById("breakEvenResult");
+
+  if(isNaN(fixed) || isNaN(price) || isNaN(variable)){
+    result.textContent =
+      "⚠️ أدخل جميع البيانات";
+    return;
+  }
+
+  if(price <= variable){
+    result.textContent =
+      "⚠️ يجب أن يكون سعر البيع أكبر من تكلفة الوحدة";
+    return;
+  }
+
+  const units =
+    fixed / (price - variable);
+
+  result.textContent =
+    "📊 نقطة التعادل: تحتاج لبيع " +
+    Math.ceil(units) + " وحدة";
+}
+
+function calculateBusinessProfit(){
+  const revenue = parseFloat(
+    document.getElementById("revenue").value
+  );
+
+  const expenses = parseFloat(
+    document.getElementById("expenses").value
+  );
+
+  const result =
+    document.getElementById("businessProfitResult");
+
+  if(isNaN(revenue) || isNaN(expenses)){
+    result.textContent =
+      "⚠️ أدخل الإيرادات والمصاريف";
+    return;
+  }
+
+  const profit = revenue - expenses;
+
+  if(profit >= 0){
+    result.textContent =
+      "💰 صافي الربح: " + profit.toFixed(2);
+  }else{
+    result.textContent =
+      "📉 الخسارة: " +
+      Math.abs(profit).toFixed(2);
+  }
+     } 
 </script>
 
 </body>
