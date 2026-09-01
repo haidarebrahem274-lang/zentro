@@ -814,6 +814,112 @@ footer{
     أدخل الإيرادات والمصاريف
   </div>
 </div>
+  <div class="tool-box">
+  <h3>📈 حاسبة نمو الأرباح</h3>
+
+  <input id="growthStart" type="number" placeholder="الربح الحالي">
+  <br><br>
+
+  <input id="growthRate" type="number" placeholder="نسبة النمو %">
+  <br><br>
+
+  <input id="growthMonths" type="number" placeholder="عدد الأشهر">
+
+  <div class="actions">
+    <button class="primary" onclick="calculateGrowth()">
+      احسب النمو
+    </button>
+  </div>
+
+  <div class="result" id="growthResult">
+    أدخل الربح ونسبة النمو وعدد الأشهر
+  </div>
+</div>
+
+<div class="tool-box">
+  <h3>👥 حاسبة راتب الموظف</h3>
+
+  <input id="salaryBase" type="number" placeholder="الراتب الأساسي">
+  <br><br>
+
+  <input id="salaryBonus" type="number" placeholder="المكافآت أو الإضافات">
+  <br><br>
+
+  <input id="salaryDeduction" type="number" placeholder="الخصومات">
+
+  <div class="actions">
+    <button class="primary" onclick="calculateSalary()">
+      احسب الراتب
+    </button>
+  </div>
+
+  <div class="result" id="salaryResult">
+    أدخل بيانات الراتب
+  </div>
+</div>
+
+<div class="tool-box">
+  <h3>🧾 حاسبة ضريبة القيمة المضافة</h3>
+
+  <input id="vatPrice" type="number" placeholder="السعر قبل الضريبة">
+  <br><br>
+
+  <input id="vatRate" type="number" placeholder="نسبة الضريبة %">
+
+  <div class="actions">
+    <button class="primary" onclick="calculateVAT()">
+      احسب الضريبة
+    </button>
+  </div>
+
+  <div class="result" id="vatResult">
+    أدخل السعر ونسبة الضريبة
+  </div>
+</div>
+
+<div class="tool-box">
+  <h3>📝 مولد عرض سعر</h3>
+
+  <input id="quoteClient" type="text" placeholder="اسم العميل">
+  <br><br>
+
+  <input id="quoteService" type="text" placeholder="اسم المنتج أو الخدمة">
+  <br><br>
+
+  <input id="quotePrice" type="number" placeholder="السعر">
+
+  <div class="actions">
+    <button class="primary" onclick="generateQuote()">
+      إنشاء عرض السعر
+    </button>
+  </div>
+
+  <div class="result" id="quoteResult">
+    أدخل بيانات عرض السعر
+  </div>
+</div>
+
+<div class="tool-box">
+  <h3>🏦 حاسبة القرض والأقساط</h3>
+
+  <input id="loanAmount" type="number" placeholder="مبلغ القرض">
+  <br><br>
+
+  <input id="loanRate" type="number" placeholder="نسبة الفائدة السنوية %">
+  <br><br>
+
+  <input id="loanMonths" type="number" placeholder="عدد الأشهر">
+
+  <div class="actions">
+    <button class="primary" onclick="calculateLoan()">
+      احسب القسط
+    </button>
+  </div>
+
+  <div class="result" id="loanResult">
+    أدخل بيانات القرض
+  </div>
+</div>
 </section>
 
 <div class="ad">
@@ -1395,6 +1501,60 @@ function calculateBusinessProfit(){
       Math.abs(profit).toFixed(2);
   }
      } 
+ function calculateGrowth(){
+  const start = parseFloat(document.getElementById("growthStart").value);
+  const rate = parseFloat(document.getElementById("growthRate").value);
+  const months = parseInt(document.getElementById("growthMonths").value);
+
+  const result = document.getElementById("growthResult");
+
+  if(isNaN(start) || isNaN(rate) || isNaN(months) || months < 1){
+    result.textContent = "⚠️ أدخل جميع البيانات بشكل صحيح";
+    return;
+  }
+
+  const finalProfit = start * Math.pow(1 + rate / 100, months);
+
+  result.textContent =
+    "📈 الربح المتوقع: " + finalProfit.toFixed(2) +
+    " | 💰 الزيادة: " + (finalProfit - start).toFixed(2);
+}
+
+
+function calculateSalary(){
+  const base =
+    parseFloat(document.getElementById("salaryBase").value) || 0;
+
+  const bonus =
+    parseFloat(document.getElementById("salaryBonus").value) || 0;
+
+  const deduction =
+    parseFloat(document.getElementById("salaryDeduction").value) || 0;
+
+  const result = document.getElementById("salaryResult");
+
+  if(base <= 0){
+    result.textContent = "⚠️ أدخل الراتب الأساسي";
+    return;
+  }
+
+  const total = base + bonus - deduction;
+
+  result.textContent =
+    "👥 الراتب النهائي: " + total.toFixed(2);
+}
+
+
+function calculateVAT(){
+  const price =
+    parseFloat(document.getElementById("vatPrice").value);
+
+  const rate =
+    parseFloat(document.getElementById("vatRate").value);
+
+  const result = document.getElementById("vatResult");
+
+  if(isNaN(price) || is 
 </script>
 
 </body>
