@@ -1227,4 +1227,376 @@ function calculateAge(){
     birthDate.getMonth();
 
   if(
-    monthDifference < 0 ||
+        (
+      monthDifference === 0 &&
+      today.getDate() < birthDate.getDate()
+    )
+  ){
+    age--;
+  }
+
+  document
+    .getElementById("ageResult")
+    .textContent =
+    "عمرك: " + age + " سنة 🎉";
+
+}
+
+
+/* رقم عشوائي */
+
+function generateRandom(){
+
+  const number =
+    Math.floor(
+      Math.random() * 1000000
+    );
+
+  document
+    .getElementById("randomResult")
+    .textContent =
+    "🎲 " + number;
+
+}
+
+
+/* مولد اللون */
+
+function generateColor(){
+
+  const color =
+    "#" +
+    Math.floor(
+      Math.random() * 16777215
+    )
+    .toString(16)
+    .padStart(6,"0");
+
+  const result =
+    document.getElementById("colorResult");
+
+  result.textContent = color;
+
+  result.style.background = color;
+  result.style.color = "#ffffff";
+
+}
+
+
+/* مولد الهاشتاغ */
+
+function generateHashtags(){
+
+  const topic =
+    document
+      .getElementById("hashtagInput")
+      .value
+      .trim()
+      .replace(/\s+/g,"");
+
+  if(!topic){
+
+    document
+      .getElementById("hashtagResult")
+      .textContent =
+      "❌ اكتب موضوعاً أولاً";
+
+    return;
+
+  }
+
+  const hashtags =
+    "#" + topic +
+    " #" + topic + "2026" +
+    " #" + topic + "Daily" +
+    " #Trending" +
+    " #ZENTRO";
+
+  document
+    .getElementById("hashtagResult")
+    .textContent =
+    hashtags;
+
+}
+
+
+/* رابط واتساب */
+
+function generateWhatsApp(){
+
+  let number =
+    document
+      .getElementById("whatsappNumber")
+      .value
+      .replace(/\D/g,"");
+
+  const message =
+    document
+      .getElementById("whatsappMessage")
+      .value;
+
+  if(!number){
+
+    document
+      .getElementById("whatsappResult")
+      .textContent =
+      "❌ أدخل رقم الهاتف";
+
+    return;
+
+  }
+
+  const link =
+    "https://wa.me/" +
+    number +
+    "?text=" +
+    encodeURIComponent(message);
+
+  const result =
+    document.getElementById("whatsappResult");
+
+  result.innerHTML =
+    '<a href="' +
+    link +
+    '" target="_blank">' +
+    "اضغط لفتح رابط واتساب 📱" +
+    "</a>";
+
+}
+
+
+/* حاسبة الربح */
+
+function calculateProfit(){
+
+  const cost =
+    parseFloat(
+      document
+        .getElementById("costPrice")
+        .value
+    );
+
+  const selling =
+    parseFloat(
+      document
+        .getElementById("sellingPrice")
+        .value
+    );
+
+  if(
+    isNaN(cost) ||
+    isNaN(selling)
+  ){
+
+    document
+      .getElementById("profitResult")
+      .textContent =
+      "❌ أدخل سعر التكلفة وسعر البيع";
+
+    return;
+
+  }
+
+  const profit =
+    selling - cost;
+
+  const margin =
+    cost !== 0
+      ? (profit / cost) * 100
+      : 0;
+
+  document
+    .getElementById("profitResult")
+    .textContent =
+    "الربح: " +
+    profit.toFixed(2) +
+    " | هامش الربح: " +
+    margin.toFixed(2) +
+    "%";
+
+}
+
+
+/* حاسبة الخصم */
+
+function calculateDiscount(){
+
+  const price =
+    parseFloat(
+      document
+        .getElementById("originalPrice")
+        .value
+    );
+
+  const discount =
+    parseFloat(
+      document
+        .getElementById("discountPercent")
+        .value
+    );
+
+  if(
+    isNaN(price) ||
+    isNaN(discount)
+  ){
+
+    document
+      .getElementById("discountResult")
+      .textContent =
+      "❌ أدخل السعر ونسبة الخصم";
+
+    return;
+
+  }
+
+  const amount =
+    price * discount / 100;
+
+  const finalPrice =
+    price - amount;
+
+  document
+    .getElementById("discountResult")
+    .textContent =
+    "قيمة الخصم: " +
+    amount.toFixed(2) +
+    " | السعر بعد الخصم: " +
+    finalPrice.toFixed(2);
+
+}
+  /* البحث */
+
+function searchTools(){
+
+  const search =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+  const tools =
+    document.querySelectorAll(".tool-card");
+
+  tools.forEach(function(tool){
+
+    const text =
+      tool.textContent.toLowerCase();
+
+    if(text.includes(search)){
+      tool.style.display = "";
+    }else{
+      tool.style.display = "none";
+    }
+
+  });
+
+}
+
+
+/* العودة للأعلى */
+
+function scrollToTop(){
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+window.addEventListener(
+  "scroll",
+  function(){
+
+    const button =
+      document.getElementById("topButton");
+
+    if(window.scrollY > 300){
+      button.style.display = "block";
+    }else{
+      button.style.display = "none";
+    }
+
+  }
+);
+
+
+/* اللغة */
+
+const translations = {
+
+  ar:{
+    heroTitle:"كل أدواتك في مكان واحد ⚡",
+    heroText:"ZENTRO منصة عالمية للأدوات الرقمية المجانية والمميزة التي تعمل مباشرة من المتصفح."
+  },
+
+  en:{
+    heroTitle:"All your tools in one place ⚡",
+    heroText:"ZENTRO is a global platform for free and premium digital tools that work directly in your browser."
+  }
+
+};
+
+
+function changeLanguage(){
+
+  const language =
+    document
+      .getElementById("languageSelect")
+      .value;
+
+  localStorage.setItem(
+    "zentroLanguage",
+    language
+  );
+
+  const data =
+    translations[language];
+
+  document
+    .getElementById("heroTitle")
+    .textContent =
+    data.heroTitle;
+
+  document
+    .getElementById("heroText")
+    .textContent =
+    data.heroText;
+
+  document.documentElement.lang =
+    language;
+
+  document.documentElement.dir =
+    language === "ar"
+      ? "rtl"
+      : "ltr";
+
+}
+
+
+/* تحميل الإعدادات */
+
+function loadLanguage(){
+
+  const language =
+    localStorage.getItem("zentroLanguage")
+    || "ar";
+
+  document
+    .getElementById("languageSelect")
+    .value =
+    language;
+
+  changeLanguage();
+
+}
+
+
+loadTheme();
+loadLanguage();
+
+</script>
+
+</body>
+</html>
