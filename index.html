@@ -244,7 +244,19 @@ textarea{
   text-align:center;
   color:var(--muted);
   background:var(--card);
-}
+}#topButton{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:var(--primary);
+  color:white;
+  font-size:22px;
+  display:none;
+  z-index:1000;
+  }
 
 footer{
   margin-top:50px;
@@ -2100,8 +2112,25 @@ function loadTheme(){
 }
 
 loadTheme();
-</script>
+function scrollToTop(){
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
 
+window.addEventListener("scroll", function(){
+  const topButton =
+    document.getElementById("topButton");
+
+  if(window.scrollY > 300){
+    topButton.style.display = "block";
+  }else{
+    topButton.style.display = "none";
+  }
+});  
+</script>
+<button id="topButton" onclick="scrollToTop()">⬆️</button>
 </body>
 </html>
 
