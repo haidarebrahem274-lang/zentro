@@ -338,53 +338,48 @@ footer{
 
   <h2>🔥 الأدوات الأساسية</h2>
   <p class="muted">أدوات مجانية تعمل مباشرة داخل الموقع</p>
+<div class="grid">
 
-  <div class="grid">
-
-    <div class="card">
-      <div class="icon">📝</div>
-      <h3>عداد الكلمات</h3>
-      <p>احسب عدد الكلمات والحروف بسرعة.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🔐</div>
-      <h3>مولد كلمة مرور</h3>
-      <p>أنشئ كلمة مرور قوية وآمنة.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🧮</div>
-      <h3>آلة حاسبة</h3>
-      <p>قم بالعمليات الحسابية بسرعة.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🎂</div>
-      <h3>حاسبة العمر</h3>
-      <p>احسب عمرك من تاريخ الميلاد.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🎲</div>
-      <h3>رقم عشوائي</h3>
-      <p>إنشاء رقم عشوائي بسرعة.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🎨</div>
-      <h3>مولد لون</h3>
-      <p>أنشئ لوناً عشوائياً مع كوده.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">#️⃣</div>
-      <h3>مولد هاشتاغات</h3>
-      <p>أنشئ هاشتاغات حسب الموضوع.</p>
-    </div>
-
+  <div class="card" onclick="document.getElementById('wordTool').scrollIntoView({behavior:'smooth'})">
+    <div class="icon">📝</div>
+    <h3>عداد الكلمات</h3>
+    <p>احسب عدد الكلمات والحروف بسرعة.</p>
   </div>
 
+  <div class="card" onclick="document.getElementById('passwordTool').scrollIntoView({behavior:'smooth'})">
+    <div class="icon">🔐</div>
+    <h3>مولد كلمة مرور</h3>
+    <p>أنشئ كلمة مرور قوية وآمنة.</p>
+  </div>
+
+  <div class="card" onclick="document.getElementById('calculatorTool').scrollIntoView({behavior:'smooth'})">
+    <div class="icon">🧮</div>
+    <h3>آلة حاسبة</h3>
+    <p>قم بالعمليات الحسابية بسرعة.</p>
+  </div>
+
+  <div class="card" onclick="document.getElementById('ageTool').scrollIntoView({behavior:'smooth'})">
+    <div class="icon">🎂</div>
+    <h3>حاسبة العمر</h3>
+    <p>احسب عمرك من تاريخ الميلاد.</p>
+  </div>
+
+  <div class="card" onclick="document.getElementById('randomTool').scrollIntoView({behavior:'smooth'})">
+    <div class="icon">🎲</div>
+    <h3>رقم عشوائي</h3>
+    <p>إنشاء رقم عشوائي بسرعة.</p>
+  </div>
+
+  <div class="card" onclick="document.getElementById('colorTool').scrollIntoView({behavior:'smooth'})">
+    <div class="icon">🎨</div>
+    <h3>مولد لون</h3>
+    <p>أنشئ لوناً عشوائياً مع كوده.</p>
+  </div>
+
+  <div class="card" onclick="document.getElementById('hashtagTool').scrollIntoView({behavior:'smooth'})">
+    <div class="icon">#️⃣</div>
+    <h3>مولد هاشتاغات</h3>
+    <p>أنشئ هاشتاغات حسب الموضوع 
 </section>
 
 <div class="ad">
@@ -396,7 +391,7 @@ footer{
   <h2>⚡ جرب الأدوات</h2>
   <p class="muted">كل الأدوات تعمل تلقائياً داخل الموقع</p>
 
-  <div class="tool-box">
+<div class="tool-box" id="wordTool">
     <h3>📝 عداد الكلمات</h3>
 
     <textarea
@@ -410,7 +405,7 @@ footer{
     </div>
   </div>
 
-  <div class="tool-box">
+  <div class="tool-box" id="passwordTool">
     <h3>🔐 مولد كلمة مرور</h3>
 
     <div class="actions">
@@ -428,7 +423,7 @@ footer{
     </div>
   </div>
 
-  <div class="tool-box">
+  <div class="tool-box" id="calculatorTool">
     <h3>🧮 آلة حاسبة</h3>
 
     <input
@@ -447,7 +442,7 @@ footer{
     </div>
   </div>
 
-  <div class="tool-box">
+  <div class="tool-box" id="ageTool">
     <h3>🎂 حاسبة العمر</h3>
 
     <input id="birthDate" type="date">
@@ -469,7 +464,7 @@ footer{
   <h2>🚀 أدوات إضافية</h2>
   <p class="muted">أدوات سريعة ومجانية</p>
 
-  <div class="tool-box">
+  <div class="tool-box" id="randomTool">
     <h3>🎲 مولد رقم عشوائي</h3>
 
     <div class="actions">
@@ -482,9 +477,8 @@ footer{
       اضغط لإنشاء رقم عشوائي
     </div>
   </div>
-
-  <div class="tool-box">
-    <h3>🎨 مولد لون عشوائي</h3>
+<div class="tool-box" id="colorTool">
+  <h3>🎨 مولد لون عشوائي</h3>
 
     <div class="actions">
       <button class="primary" onclick="generateColor()">
@@ -497,8 +491,8 @@ footer{
     </div>
   </div>
 
-  <div class="tool-box">
-    <h3>#️⃣ مولد هاشتاغات</h3>
+  <div class="tool-box" id="hashtagTool">
+  <h3>#️⃣ مولد هاشتاغات</h3>
 
     <input
       id="hashtagInput"
