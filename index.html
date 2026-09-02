@@ -2172,10 +2172,47 @@ const translations = {
 };
 
 function changeLanguage(){
-  const
+  const language =
+    document.getElementById("languageSelect").value;
 
-  alert("🌍 تم اختيار اللغة. الترجمة الكاملة سيتم إضافتها تدريجياً.");
-  }
+  localStorage.setItem("zentroLanguage", language);
+
+  const selectedLanguage =
+    translations[language] || translations.en;
+
+  document.querySelectorAll("[data-i18n]").forEach(function(element){
+    const key = element.getAttribute("data-i18n");
+
+    if(selectedLanguage[key]){
+      element.textContent = selectedLanguage[key];
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(function(element){
+    const key =
+      element.getAttribute("data-i18n-placeholder");
+
+    if(selectedLanguage[key]){
+      element.placeholder = selectedLanguage[key];
+    }
+  });
+
+  document.documentElement.lang = language;
+  document.documentElement.dir =
+    language === "ar" ? "rtl" : "ltr";
+}
+
+function loadLanguage(){
+  const savedLanguage =
+    localStorage.getItem("zentroLanguage") || "ar";
+
+  document.getElementById("languageSelect").value =
+    savedLanguage;
+
+  changeLanguage();
+}
+
+loadLanguage();
 </script>
 <button id="topButton" onclick="scrollToTop()">⬆️</button>
 </body>
