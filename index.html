@@ -2,21 +2,27 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ZENTRO ⚡ | أدوات مجانية</title>
-
-<meta name="description" content="ZENTRO منصة عالمية للأدوات الرقمية المجانية.">
+<title>ZENTRO ⚡ | أدوات رقمية مجانية</title>
 
 <style>
 :root{
-  --primary:#2563eb;
-  --secondary:#7c3aed;
+  --primary:#6c63ff;
+  --secondary:#8b5cf6;
   --bg:#f5f7fb;
   --card:#ffffff;
-  --text:#172033;
-  --muted:#64748b;
-  --border:#e2e8f0;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+}
+
+body.dark{
+  --bg:#111827;
+  --card:#1f2937;
+  --text:#f9fafb;
+  --muted:#9ca3af;
+  --border:#374151;
 }
 
 *{
@@ -29,32 +35,39 @@ html{
 
 body{
   margin:0;
-  font-family:Tahoma,Arial,sans-serif;
+  font-family:Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
+  transition:.3s;
 }
 
-button,input,textarea{
-  font:inherit;
+button,
+input,
+textarea,
+select{
+  font-family:inherit;
 }
 
 button{
-  border:0;
-  border-radius:12px;
-  padding:12px 16px;
+  border:none;
   cursor:pointer;
-  font-weight:bold;
 }
 
 .container{
-  width:min(1100px,92%);
+  width:min(1150px,92%);
   margin:auto;
 }
 
+/* HEADER */
+
 header{
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
   color:white;
-  padding:20px 0 65px;
+  padding:20px 0 90px;
 }
 
 nav{
@@ -66,114 +79,120 @@ nav{
 
 .logo{
   font-size:30px;
-  font-weight:900;
+  font-weight:bold;
 }
 
 .logo span{
-  color:#facc15;
+  color:#fbbf24;
 }
 
 .nav-actions{
   display:flex;
-  gap:8px;
+  gap:10px;
+  align-items:center;
+}
+
+.light,
+.dark-btn{
+  border:none;
+  padding:10px 14px;
+  border-radius:12px;
+  font-size:15px;
 }
 
 .light{
   background:white;
-  color:var(--primary);
+  color:#222;
 }
 
 .dark-btn{
-  background:#172033;
+  background:rgba(255,255,255,.2);
   color:white;
 }
 
 .hero{
   text-align:center;
-  padding:50px 0 0;
+  padding-top:60px;
 }
 
 .hero h1{
-  font-size:40px;
-  margin:0;
+  font-size:42px;
+  margin:0 0 15px;
 }
 
 .hero p{
   max-width:700px;
-  margin:15px auto;
-  line-height:1.8;
+  margin:auto;
+  font-size:18px;
+  line-height:1.7;
 }
 
 .search-box{
   max-width:650px;
-  margin:25px auto 0;
+  margin:30px auto 0;
   background:white;
   padding:7px;
   border-radius:16px;
   display:flex;
+  gap:7px;
 }
 
 .search-box input{
   flex:1;
-  border:0;
-  outline:0;
-  padding:12px;
-  min-width:0;
+  border:none;
+  outline:none;
+  padding:14px;
+  font-size:16px;
+  color:#111;
+  background:transparent;
 }
 
 .search-box button{
   background:var(--primary);
   color:white;
+  padding:12px 20px;
+  border-radius:12px;
 }
 
+/* MAIN */
+
 main{
-  padding-bottom:40px;
+  padding-bottom:50px;
 }
 
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin-top:-30px;
+  gap:15px;
+  margin-top:-40px;
 }
 
 .stat{
   background:var(--card);
-  padding:18px;
+  padding:22px;
   border-radius:18px;
   text-align:center;
   box-shadow:0 8px 25px rgba(0,0,0,.08);
+  border:1px solid var(--border);
 }
 
 .stat b{
   display:block;
-  font-size:23px;
+  font-size:25px;
   color:var(--primary);
 }
 
 .stat span{
   color:var(--muted);
-  font-size:13px;
+  font-size:14px;
 }
-@media(max-width:600px){
 
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin-top:-20px;
-  }
-
-  .stat{
-    padding:15px 8px;
-    min-height:auto;
-  }
-
-}
 .section{
-  margin-top:40px;
+  margin-top:50px;
 }
 
 .section h2{
+  font-size:28px;
   margin-bottom:8px;
 }
 
@@ -183,2058 +202,872 @@ main{
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
+  grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  margin-top:25px;
 }
 
-.card,
-.tool-box{
+/* CARDS */
+
+.card{
   background:var(--card);
-  border:1px solid var(--border);
+  padding:24px;
   border-radius:20px;
-  padding:20px;
+  border:1px solid var(--border);
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 15px 35px rgba(0,0,0,.12);
 }
 
 .icon{
-  font-size:32px;
+  font-size:36px;
 }
 
 .card h3{
-  margin:10px 0 5px;
+  margin:14px 0 8px;
 }
 
 .card p{
   color:var(--muted);
-  font-size:14px;
+  line-height:1.6;
 }
 
-.tool-box{
-  margin-top:16px;
-}
+/* PREMIUM */
 
-.tool-box h3{
-  margin-top:0;
-}
-
-input,
-textarea{
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:14px;
-}
-
-textarea{
-  min-height:120px;
-  resize:vertical;
-}
-
-.actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-
-.primary{
-  background:var(--primary);
+.premium-card{
+  position:relative;
+  background:linear-gradient(
+    135deg,
+    #312e81,
+    #7c3aed
+  );
   color:white;
-}
-
-.result{
-  margin-top:14px;
-  padding:14px;
-  background:var(--bg);
-  border-radius:12px;
-  word-break:break-word;
-}
-
-.ad{
-  margin:30px 0;
   padding:25px;
-  border:2px dashed var(--border);
-  border-radius:18px;
-  text-align:center;
-  color:var(--muted);
-  background:var(--card);
-}#topButton{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  background:var(--primary);
-  color:white;
-  font-size:22px;
-  display:none;
-  z-index:1000;
-  }
-
-footer{
-  margin-top:50px;
-  padding:35px;
-  text-align:center;
-  background:#111827;
-  color:white;
+  border-radius:20px;
 }
 
-.dark{
-  --bg:#111827;
-  --card:#1f2937;
-  --text:#ffffff;
-  --muted:#cbd5e1;
-  --border:#374151;
-@media(max-width:650px){
-
-  nav{
-    flex-direction:column;
-  }
-
-  .hero h1{
-    font-size:29px;
-  }
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin-top:-20px;
-  }
-
-  .stat{
-    padding:15px 8px;
-    min-height:0;
-  }
-
+.premium-card p{
+  color:#e5e7eb;
+  line-height:1.6;
 }
-</style>
-</head>
 
-<body>
+.badge{
+  position:absolute;
+  top:15px;
+  left:15px;
+  background:#fbbf24;
+  color:#111;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
 
-<header>
-<div class="container">
+.price{
+  font-size:
+    <section class="section">
 
-<nav>
-  <div class="logo">ZEN<span>TRO</span> ⚡</div>
+<h2>⚡ جرب الأدوات</h2>
 
-  <div class="nav-actions">
-  <select id="languageSelect" class="light" onchange="changeLanguage()">
-  <option value="ar">🌍 العربية</option>
-  <option value="en">🇬🇧 English</option>
-  <option value="tr">🇹🇷 Türkçe</option>
-  <option value="de">🇩🇪 Deutsch</option>
-  <option value="fr">🇫🇷 Français</option>
-  <option value="es">🇪🇸 Español</option>
-  <option value="ru">🇷🇺 Русский</option>
-  <option value="zh">🇨🇳 中文</option>
-  </select>
-    <button class="dark-btn" onclick="toggleDark()">🌙</button>
-  </div>
-</nav>
-
-<div class="hero">
-  <h1 data-i18n="heroTitle">كل أدواتك في مكان واحد ⚡</h1>
-
-<p data-i18n="heroText">
-  ZENTRO منصة عالمية للأدوات الرقمية المجانية التي تعمل مباشرة من المتصفح.
+<p class="muted">
+كل الأدوات تعمل مباشرة داخل الموقع
 </p>
-<div class="search-box">
-  <input id="searchInput"
-    placeholder="ابحث عن أداة..."
-    data-i18n-placeholder="searchPlaceholder"
-    oninput="searchTools()">
 
-  <button onclick="searchTools()" data-i18n="searchButton">
-    🔍 بحث
-  </button>
+<div class="tool-box">
+
+<h3>📝 عداد الكلمات</h3>
+
+<textarea
+id="textInput"
+placeholder="اكتب أو الصق النص هنا..."
+oninput="countText()"></textarea>
+
+<div class="result" id="wordResult">
+عدد الكلمات: 0 | عدد الحروف: 0
 </div>
+
+</div>
+
+
+<div class="tool-box">
+
+<h3>🔐 مولد كلمة مرور</h3>
+
+<div class="actions">
+
+<button
+class="primary"
+onclick="generatePassword()">
+إنشاء كلمة مرور
+</button>
+
+<button onclick="copyPassword()">
+نسخ
+</button>
+
+</div>
+
+<div class="result" id="passwordResult">
+اضغط على إنشاء كلمة مرور
 </div>
 
 </div>
-</header>
 
-<main class="container">
 
-<div class="stats">
-<div class="stats">
-  <div class="stat">
-    <b>12+</b>
-    <span data-i18n="freeTools">أداة مجانية</span>
-  </div>
+<div class="tool-box">
 
-  <div class="stat">
-    <b>24/7</b>
-    <span data-i18n="available">متاح دائماً</span>
-  </div>
+<h3>🧮 آلة حاسبة</h3>
 
-  <div class="stat">
-    <b>🌍</b>
-    <span data-i18n="global">عالمي</span>
-  </div>
+<input
+id="calcInput"
+placeholder="مثال: 10 + 20 * 2">
 
-  <div class="stat">
-    <b>⚡</b>
-    <span data-i18n="fastFree">سريع ومجاني</span>
-  </div>
+<div class="actions">
+
+<button
+class="primary"
+onclick="calculate()">
+احسب
+</button>
+
 </div>
+
+<div class="result" id="calcResult">
+النتيجة ستظهر هنا
+</div>
+
+</div>
+
+
+<div class="tool-box">
+
+<h3>🎂 حاسبة العمر</h3>
+
+<input
+id="birthDate"
+type="date">
+
+<div class="actions">
+
+<button
+class="primary"
+onclick="calculateAge()">
+احسب العمر
+</button>
+
+</div>
+
+<div class="result" id="ageResult">
+اختر تاريخ ميلادك
+</div>
+
+</div>
+
+
+<div class="tool-box">
+
+<h3>🎲 مولد رقم عشوائي</h3>
+
+<div class="actions">
+
+<button
+class="primary"
+onclick="generateRandom()">
+إنشاء رقم
+</button>
+
+</div>
+
+<div class="result" id="randomResult">
+اضغط لإنشاء رقم عشوائي
+</div>
+
+</div>
+
+
+<div class="tool-box">
+
+<h3>🎨 مولد لون عشوائي</h3>
+
+<div class="actions">
+
+<button
+class="primary"
+onclick="generateColor()">
+إنشاء لون
+</button>
+
+</div>
+
+<div
+class="result"
+id="colorResult">
+
+اضغط لإنشاء لون
+
+</div>
+
+</div>
+
+
+<div class="tool-box">
+
+<h3>#️⃣ مولد هاشتاغات</h3>
+
+<input
+id="hashtagInput"
+placeholder="اكتب موضوعاً مثل الألعاب أو السفر">
+
+<div class="actions">
+
+<button
+class="primary"
+onclick="generateHashtags()">
+إنشاء هاشتاغات
+</button>
+
+</div>
+
+<div class="result" id="hashtagResult">
+ستظهر الهاشتاغات هنا
+</div>
+
+</div>
+
+
+<div class="tool-box">
+
+<h3>🔗 مولد رابط واتساب</h3>
+
+<input
+id="whatsappNumber"
+placeholder="مثال: 9639XXXXXXXX">
+
+<textarea
+id="whatsappMessage"
+placeholder="اكتب الرسالة..."></textarea>
+
+<div class="actions">
+
+<button
+class="primary"
+onclick="generateWhatsApp()">
+إنشاء الرابط
+</button>
+
+</div>
+
+<div class="result" id="whatsappResult">
+سيظهر الرابط هنا
+</div>
+
+</div>
+
+
+<div class="tool-box">
+
+<h3>💰 حاسبة هامش الربح</h3>
+
+<input
+id="costPrice"
+type="number"
+placeholder="سعر التكلفة">
+
+<input
+id="sellingPrice"
+type="number"
+placeholder="سعر البيع">
+
+<div class="actions">
+
+<button
+class="primary"
+onclick="calculateProfit()">
+احسب الربح
+</button>
+
+</div>
+
+<div class="result" id="profitResult">
+أدخل سعر التكلفة وسعر البيع
+</div>
+
+</div>
+
+
+<div class="tool-box">
+
+<h3>🏷️ حاسبة الخصم</h3>
+
+<input
+id="originalPrice"
+type="number"
+placeholder="السعر الأصلي">
+
+<input
+id="discountPercent"
+type="number"
+placeholder="نسبة الخصم %">
+
+<div class="actions">
+
+<button
+class="primary"
+onclick="calculateDiscount()">
+احسب الخصم
+</button>
+
+</div>
+
+<div class="result" id="discountResult">
+أدخل السعر ونسبة الخصم
+</div>
+
+</div>
+
+</section>
+
+
 <section class="section">
-<h2 data-i18n="basicTools">🔥 الأدوات الأساسية</h2>
 
-<p class="muted" data-i18n="basicToolsText">
-  أدوات مجانية تعمل مباشرة داخل الموقع
+<h2>💎 الأدوات المميزة</h2>
+
+<p class="muted">
+أدوات احترافية سيتم توفيرها لاحقاً كخدمات مدفوعة
 </p>
+
 <div class="grid">
 
-  <div class="card" onclick="document.getElementById('wordTool').scrollIntoView({behavior:'smooth'})">
-    <div class="icon">📝</div>
-    <h3>عداد الكلمات</h3>
-    <p>احسب عدد الكلمات والحروف بسرعة.</p>
-  </div>
+<div class="premium-card">
 
-  <div class="card" onclick="document.getElementById('passwordTool').scrollIntoView({behavior:'smooth'})">
-    <div class="icon">🔐</div>
-    <h3>مولد كلمة مرور</h3>
-    <p>أنشئ كلمة مرور قوية وآمنة.</p>
-  </div>
-
-  <div class="card" onclick="document.getElementById('calculatorTool').scrollIntoView({behavior:'smooth'})">
-    <div class="icon">🧮</div>
-    <h3>آلة حاسبة</h3>
-    <p>قم بالعمليات الحسابية بسرعة.</p>
-  </div>
-
-  <div class="card" onclick="document.getElementById('ageTool').scrollIntoView({behavior:'smooth'})">
-    <div class="icon">🎂</div>
-    <h3>حاسبة العمر</h3>
-    <p>احسب عمرك من تاريخ الميلاد.</p>
-  </div>
-
-  <div class="card" onclick="document.getElementById('randomTool').scrollIntoView({behavior:'smooth'})">
-    <div class="icon">🎲</div>
-    <h3>رقم عشوائي</h3>
-    <p>إنشاء رقم عشوائي بسرعة.</p>
-  </div>
-
-  <div class="card" onclick="document.getElementById('colorTool').scrollIntoView({behavior:'smooth'})">
-    <div class="icon">🎨</div>
-    <h3>مولد لون</h3>
-    <p>أنشئ لوناً عشوائياً مع كوده.</p>
-  </div>
-
-  <div class="card" onclick="document.getElementById('hashtagTool').scrollIntoView({behavior:'smooth'})">
-    <div class="icon">#️⃣</div>
-    <h3>مولد هاشتاغات</h3>
-    <p>أنشئ هاشتاغات حسب الموضوع 
-</section>
-
-<div class="ad">
-  📢 مساحة إعلانية — سيتم ربط الإعلانات لاحقاً
+<div class="badge">
+PREMIUM
 </div>
 
-<section class="section">
-
-  <h2>⚡ جرب الأدوات</h2>
-  <p class="muted">كل الأدوات تعمل تلقائياً داخل الموقع</p>
-
-<div class="tool-box" id="wordTool">
-    <h3>📝 عداد الكلمات</h3>
-
-    <textarea
-      id="textInput"
-      placeholder="اكتب أو الصق النص هنا..."
-      oninput="countText()"
-    ></textarea>
-
-    <div class="result" id="wordResult">
-      عدد الكلمات: 0 | عدد الحروف: 0
-    </div>
-  </div>
-
-  <div class="tool-box" id="passwordTool">
-    <h3>🔐 مولد كلمة مرور</h3>
-
-    <div class="actions">
-      <button class="primary" onclick="generatePassword()">
-        إنشاء كلمة مرور
-      </button>
-
-      <button onclick="copyPassword()">
-        نسخ
-      </button>
-    </div>
-
-    <div class="result" id="passwordResult">
-      اضغط على إنشاء كلمة مرور
-    </div>
-  </div>
-
-  <div class="tool-box" id="calculatorTool">
-    <h3>🧮 آلة حاسبة</h3>
-
-    <input
-      id="calcInput"
-      placeholder="مثال: 10 + 20 * 2"
-    >
-
-    <div class="actions">
-      <button class="primary" onclick="calculate()">
-        احسب
-      </button>
-    </div>
-
-    <div class="result" id="calcResult">
-      النتيجة ستظهر هنا
-    </div>
-  </div>
-
-  <div class="tool-box" id="ageTool">
-    <h3>🎂 حاسبة العمر</h3>
-
-    <input id="birthDate" type="date">
-
-    <div class="actions">
-      <button class="primary" onclick="calculateAge()">
-        احسب العمر
-      </button>
-    </div>
-
-    <div class="result" id="ageResult">
-      اختر تاريخ ميلادك
-    </div>
-      </div>
-</section>
-
-<section class="section">
-
-  <h2>🚀 أدوات إضافية</h2>
-  <p class="muted">أدوات سريعة ومجانية</p>
-
-  <div class="tool-box" id="randomTool">
-    <h3>🎲 مولد رقم عشوائي</h3>
-
-    <div class="actions">
-      <button class="primary" onclick="generateRandomNumber()">
-        إنشاء رقم
-      </button>
-    </div>
-
-    <div class="result" id="randomResult">
-      اضغط لإنشاء رقم عشوائي
-    </div>
-  </div>
-<div class="tool-box" id="colorTool">
-  <h3>🎨 مولد لون عشوائي</h3>
-
-    <div class="actions">
-      <button class="primary" onclick="generateColor()">
-        إنشاء لون
-      </button>
-    </div>
-
-    <div class="result" id="colorResult">
-      اضغط لإنشاء لون
-    </div>
-  </div>
-
-  <div class="tool-box" id="hashtagTool">
-  <h3>#️⃣ مولد هاشتاغات</h3>
-
-    <input
-      id="hashtagInput"
-      placeholder="اكتب موضوعاً مثل الألعاب أو السفر"
-    >
-
-    <div class="actions">
-      <button class="primary" onclick="generateHashtags()">
-        إنشاء هاشتاغات
-      </button>
-    </div>
-
-    <div class="result" id="hashtagResult">
-      ستظهر الهاشتاغات هنا
-    </div>
-  </div>
-<div class="tool-box">
-  <h3>🔤 تحويل النص</h3>
-
-  <textarea id="caseInput"
-    placeholder="اكتب النص هنا..."></textarea>
-
-  <div class="actions">
-    <button class="primary" onclick="toUpper()">
-      أحرف كبيرة
-    </button>
-
-    <button onclick="toLower()">
-      أحرف صغيرة
-    </button>
-  </div>
-
-  <div class="result" id="caseResult">
-    ستظهر النتيجة هنا
-  </div>
+<div class="icon">
+📄
 </div>
 
-<div class="tool-box">
-  <h3>🔗 مولد رابط واتساب</h3>
-
-  <input id="whatsappNumber"
-    placeholder="مثال: 9639XXXXXXXX">
-
-  <textarea id="whatsappMessage"
-    placeholder="اكتب الرسالة..."></textarea>
-
-  <div class="actions">
-    <button class="primary" onclick="generateWhatsAppLink()">
-      إنشاء الرابط
-    </button>
-  </div>
-
-  <div class="result" id="whatsappResult">
-    سيظهر الرابط هنا
-  </div>
-</div>
-
-<div class="tool-box">
-  <h3>⏱️ مؤقت</h3>
-
-  <input id="timerSeconds"
-    type="number"
-    placeholder="عدد الثواني">
-
-  <div class="actions">
-    <button class="primary" onclick="startTimer()">
-      بدء المؤقت
-    </button>
-  </div>
-
-  <div class="result" id="timerResult">
-    أدخل عدد الثواني
-  </div>
-</div>
- <div class="tool-box">
-  <h3>📅 حاسبة الأيام بين تاريخين</h3>
-
-  <input id="startDate" type="date">
-  <br><br>
-  <input id="endDate" type="date">
-
-  <div class="actions">
-    <button class="primary" onclick="calculateDays()">
-      احسب الأيام
-    </button>
-  </div>
-
-  <div class="result" id="daysResult">
-    اختر تاريخ البداية والنهاية
-  </div>
-</div>
-
-<div class="tool-box">
-  <h3>🔐 فحص قوة كلمة المرور</h3>
-
-  <input
-    id="strengthInput"
-    type="password"
-    placeholder="اكتب كلمة المرور..."
-  >
-
-  <div class="actions">
-    <button class="primary" onclick="checkPasswordStrength()">
-      فحص كلمة المرور
-    </button>
-  </div>
-
-  <div class="result" id="strengthResult">
-    ستظهر قوة كلمة المرور هنا
-  </div>
-</div>
-
-<div class="tool-box">
-  <h3>👤 مولد اسم مستخدم</h3>
-
-  <input
-    id="usernameInput"
-    placeholder="اكتب اسمك أو كلمة..."
-  >
-
-  <div class="actions">
-    <button class="primary" onclick="generateUsername()">
-      إنشاء أسماء
-    </button>
-  </div>
-
-  <div class="result" id="usernameResult">
-    ستظهر أسماء المستخدمين هنا
-  </div>
-</div> 
-  <div class="tool-box">
-  <h3>💰 حاسبة هامش الربح</h3>
-
-  <input
-    id="costPrice"
-    type="number"
-    placeholder="سعر التكلفة"
-  >
-
-  <br><br>
-
-  <input
-    id="sellPrice"
-    type="number"
-    placeholder="سعر البيع"
-  >
-
-  <div class="actions">
-    <button class="primary" onclick="calculateProfit()">
-      احسب الربح
-    </button>
-  </div>
-
-  <div class="result" id="profitResult">
-    أدخل سعر التكلفة وسعر البيع
-  </div>
-  </div>
-  <div class="tool-box">
-  <h3>🏷️ حاسبة الخصم</h3>
-
-  <input
-    id="discountPrice"
-    type="number"
-    placeholder="السعر الأصلي"
-  >
-
-  <br><br>
-
-  <input
-    id="discountPercent"
-    type="number"
-    placeholder="نسبة الخصم %"
-  >
-
-  <div class="actions">
-    <button class="primary" onclick="calculateDiscount()">
-      احسب الخصم
-    </button>
-  </div>
-
-  <div class="result" id="discountResult">
-    أدخل السعر ونسبة الخصم
-  </div>
-  </div>
-  <div class="tool-box">
-  <h3>📄 مولد فاتورة بسيطة</h3>
-
-  <input
-    id="invoiceName"
-    placeholder="اسم العميل"
-  >
-
-  <br><br>
-
-  <input
-    id="invoiceItem"
-    placeholder="اسم المنتج أو الخدمة"
-  >
-
-  <br><br>
-
-  <input
-    id="invoicePrice"
-    type="number"
-    placeholder="السعر"
-  >
-
-  <div class="actions">
-    <button class="primary" onclick="generateInvoice()">
-      إنشاء الفاتورة
-    </button>
-  </div>
-
-  <div class="result" id="invoiceResult">
-    أدخل بيانات الفاتورة
-  </div>
-  </div>
-  <div class="tool-box">
-  <h3>💱 محول العملات</h3>
-
-  <input id="currencyAmount" type="number"
-    placeholder="المبلغ بالدولار USD">
-
-  <select id="currencySelect">
-    <option value="EUR">🇪🇺 يورو EUR</option>
-    <option value="TRY">🇹🇷 ليرة تركية TRY</option>
-    <option value="AED">🇦🇪 درهم إماراتي AED</option>
-    <option value="SAR">🇸🇦 ريال سعودي SAR</option>
-    <option value="GBP">🇬🇧 جنيه إسترليني GBP</option>
-  </select>
-
-  <div class="actions">
-    <button class="primary" onclick="convertCurrency()">
-      تحويل العملة
-    </button>
-  </div>
-
-  <div class="result" id="currencyResult">
-    أدخل المبلغ واختر العملة
-  </div>
-</div>
-
-
-<div class="tool-box">
-  <h3>🧾 حاسبة الضريبة</h3>
-
-  <input id="taxPrice" type="number"
-    placeholder="السعر قبل الضريبة">
-
-  <br><br>
-
-  <input id="taxRate" type="number"
-    placeholder="نسبة الضريبة %">
-
-  <div class="actions">
-    <button class="primary" onclick="calculateTax()">
-      احسب الضريبة
-    </button>
-  </div>
-
-  <div class="result" id="taxResult">
-    أدخل السعر ونسبة الضريبة
-  </div>
-</div>
-
-
-<div class="tool-box">
-  <h3>📊 حاسبة نقطة التعادل</h3>
-
-  <input id="fixedCosts" type="number"
-    placeholder="التكاليف الثابتة">
-
-  <br><br>
-
-  <input id="sellingPrice" type="number"
-    placeholder="سعر بيع الوحدة">
-
-  <br><br>
-
-  <input id="variableCost" type="number"
-    placeholder="تكلفة الوحدة">
-
-  <div class="actions">
-    <button class="primary" onclick="calculateBreakEven()">
-      احسب نقطة التعادل
-    </button>
-  </div>
-
-  <div class="result" id="breakEvenResult">
-    أدخل بيانات المشروع
-  </div>
-</div>
-
-
-<div class="tool-box">
-  <h3>💵 حاسبة الربح والخسارة</h3>
-
-  <input id="revenue" type="number"
-    placeholder="إجمالي الإيرادات">
-
-  <br><br>
-
-  <input id="expenses" type="number"
-    placeholder="إجمالي المصاريف">
-
-  <div class="actions">
-    <button class="primary" onclick="calculateBusinessProfit()">
-      احسب النتيجة
-    </button>
-  </div>
-
-  <div class="result" id="businessProfitResult">
-    أدخل الإيرادات والمصاريف
-  </div>
-</div>
-  <div class="tool-box">
-  <h3>📈 حاسبة نمو الأرباح</h3>
-
-  <input id="growthStart" type="number" placeholder="الربح الحالي">
-  <br><br>
-
-  <input id="growthRate" type="number" placeholder="نسبة النمو %">
-  <br><br>
-
-  <input id="growthMonths" type="number" placeholder="عدد الأشهر">
-
-  <div class="actions">
-    <button class="primary" onclick="calculateGrowth()">
-      احسب النمو
-    </button>
-  </div>
-
-  <div class="result" id="growthResult">
-    أدخل الربح ونسبة النمو وعدد الأشهر
-  </div>
-</div>
-
-<div class="tool-box">
-  <h3>👥 حاسبة راتب الموظف</h3>
-
-  <input id="salaryBase" type="number" placeholder="الراتب الأساسي">
-  <br><br>
-
-  <input id="salaryBonus" type="number" placeholder="المكافآت أو الإضافات">
-  <br><br>
-
-  <input id="salaryDeduction" type="number" placeholder="الخصومات">
-
-  <div class="actions">
-    <button class="primary" onclick="calculateSalary()">
-      احسب الراتب
-    </button>
-  </div>
-
-  <div class="result" id="salaryResult">
-    أدخل بيانات الراتب
-  </div>
-</div>
-
-<div class="tool-box">
-  <h3>🧾 حاسبة ضريبة القيمة المضافة</h3>
-
-  <input id="vatPrice" type="number" placeholder="السعر قبل الضريبة">
-  <br><br>
-
-  <input id="vatRate" type="number" placeholder="نسبة الضريبة %">
-
-  <div class="actions">
-    <button class="primary" onclick="calculateVAT()">
-      احسب الضريبة
-    </button>
-  </div>
-
-  <div class="result" id="vatResult">
-    أدخل السعر ونسبة الضريبة
-  </div>
-</div>
-
-<div class="tool-box">
-  <h3>📝 مولد عرض سعر</h3>
-
-  <input id="quoteClient" type="text" placeholder="اسم العميل">
-  <br><br>
-
-  <input id="quoteService" type="text" placeholder="اسم المنتج أو الخدمة">
-  <br><br>
-
-  <input id="quotePrice" type="number" placeholder="السعر">
-
-  <div class="actions">
-    <button class="primary" onclick="generateQuote()">
-      إنشاء عرض السعر
-    </button>
-  </div>
-
-  <div class="result" id="quoteResult">
-    أدخل بيانات عرض السعر
-  </div>
-</div>
-
-<div class="tool-box">
-  <h3>🏦 حاسبة القرض والأقساط</h3>
-
-  <input id="loanAmount" type="number" placeholder="مبلغ القرض">
-  <br><br>
-
-  <input id="loanRate" type="number" placeholder="نسبة الفائدة السنوية %">
-  <br><br>
-
-  <input id="loanMonths" type="number" placeholder="عدد الأشهر">
-
-  <div class="actions">
-    <button class="primary" onclick="calculateLoan()">
-      احسب القسط
-    </button>
-  </div>
-
-  <div class="result" id="loanResult">
-    أدخل بيانات القرض
-  </div>
-</div>
-</section>
-<div class="tool-box">
-  <h3>📐 محول الوحدات</h3>
-  <input id="unitValue" type="number" placeholder="أدخل القيمة">
-
-  <select id="unitType">
-    <option value="kmToM">كيلومتر إلى متر</option>
-    <option value="mToKm">متر إلى كيلومتر</option>
-    <option value="kgToG">كيلوغرام إلى غرام</option>
-    <option value="gToKg">غرام إلى كيلوغرام</option>
-    <option value="cToF">مئوية إلى فهرنهايت</option>
-    <option value="fToC">فهرنهايت إلى مئوية</option>
-  </select>
-
-  <div class="actions">
-    <button class="primary" onclick="convertUnit()">
-      تحويل
-    </button>
-  </div>
-
-  <div class="result" id="unitResult">
-    أدخل القيمة واختر التحويل
-  </div>
-</div>
-
-
-<div class="tool-box">
-  <h3>📋 منظم النصوص</h3>
-
-  <textarea id="cleanText" placeholder="اكتب أو الصق النص هنا..."></textarea>
-
-  <div class="actions">
-    <button class="primary" onclick="cleanText()">
-      تنظيم النص
-    </button>
-  </div>
-
-  <div class="result" id="cleanTextResult">
-    ستظهر النتيجة هنا
-  </div>
-</div>
-
-
-<div class="tool-box">
-  <h3>🔗 مولد QR Code</h3>
-
-  <input id="qrText" placeholder="اكتب رابطاً أو نصاً">
-
-  <div class="actions">
-    <button class="primary" onclick="generateQR()">
-      إنشاء QR
-    </button>
-  </div>
-
-  <div class="result" id="qrResult">
-    أدخل النص أو الرابط
-  </div>
-</div>
-
-
-<div class="tool-box">
-  <h3>🕒 الوقت العالمي</h3>
-
-  <select id="worldCity">
-    <option value="Asia/Damascus">دمشق</option>
-    <option value="Asia/Riyadh">الرياض</option>
-    <option value="Asia/Dubai">دبي</option>
-    <option value="Europe/London">لندن</option>
-    <option value="America/New_York">نيويورك</option>
-  </select>
-
-  <div class="actions">
-    <button class="primary" onclick="showWorldTime()">
-      عرض الوقت
-    </button>
-  </div>
-
-  <div class="result" id="worldTimeResult">
-    اختر مدينة
-  </div>
-</div>
-
-
-<div class="tool-box">
-  <h3>📅 حاسبة التاريخ</h3>
-
-  <input id="dateStart" type="date">
-  <input id="dateEnd" type="date">
-
-  <div class="actions">
-    <button class="primary" onclick="calculateDateDifference()">
-      احسب الفرق
-    </button>
-  </div>
-
-  <div class="result" id="dateDifferenceResult">
-    اختر تاريخين
-  </div>
-</div>
-
-
-<div class="tool-box">
-  <h3>📝 مولد سيرة ذاتية بسيطة</h3>
-
-  <input id="cvName" placeholder="الاسم الكامل">
-  <input id="cvJob" placeholder="المهنة أو التخصص">
-
-  <textarea id="cvSkills" placeholder="المهارات"></textarea>
-
-  <textarea id="cvExperience" placeholder="الخبرات"></textarea>
-
-  <div class="actions">
-    <button class="primary" onclick="generateCV()">
-      إنشاء السيرة الذاتية
-    </button>
-  </div>
-
-  <div class="result" id="cvResult">
-    أدخل بياناتك لإنشاء السيرة الذاتية
-  </div>
-</div>
-
-
-<div class="tool-box">
-  <h3>🔒 تشفير وفك تشفير نص بسيط</h3>
-
-  <textarea id="cryptoText" placeholder="اكتب النص هنا..."></textarea>
-
-  <div class="actions">
-    <button class="primary" onclick="encodeText()">
-      تشفير
-    </button>
-
-    <button class="primary" onclick="decodeText()">
-      فك التشفير
-    </button>
-  </div>
-
-  <div class="result" id="cryptoResult">
-    ستظهر النتيجة هنا
-  </div>
-</div>
-
-
-<div class="tool-box">
-  <h3>📱 مولد رابط Telegram</h3>
-
-  <input id="telegramUser" placeholder="اسم المستخدم بدون @">
-
-  <div class="actions">
-    <button class="primary" onclick="generateTelegramLink()">
-      إنشاء الرابط
-    </button>
-  </div>
-
-  <div class="result" id="telegramResult">
-    أدخل اسم المستخدم
-  </div>
-</div>
-
-
-<div class="tool-box">
-  <h3>🖼️ تحويل الصور PNG / JPG</h3>
-
-  <input
-    id="imageInput"
-    type="file"
-    accept="image/png,image/jpeg"
-  >
-
-  <select id="imageFormat">
-    <option value="image/png">تحويل إلى PNG</option>
-    <option value="image/jpeg">تحويل إلى JPG</option>
-  </select>
-
-  <div class="actions">
-    <button class="primary" onclick="convertImage()">
-      تحويل الصورة
-    </button>
-  </div>
-
-  <div class="result" id="imageResult">
-    اختر صورة للتحويل
-  </div>
-</div>
-<div class="ad">
-  📢 مساحة إعلانية — سيتم تجهيز الربح لاحقاً
-</div>
-
-</main>
-
-<footer>
+<h3>
+مولد سيرة ذاتية احترافي
+</h3>
+
+<p>
+إنشاء سيرة ذاتية احترافية جاه
+  <footer>
   <h2>ZENTRO ⚡</h2>
-  <p>منصة عالمية للأدوات الرقمية المجانية.</p>
+  <p>منصة عالمية للأدوات الرقمية المجانية والمميزة.</p>
   <p>🌍 متاح للمستخدمين حول العالم</p>
   <p>© 2026 ZENTRO — جميع الحقوق محفوظة</p>
 </footer>
 
+<button id="topButton" onclick="scrollToTop()">⬆️</button>
+
 <script>
 
-function countText(){
-  const text = document.getElementById("textInput").value.trim();
-  const words = text ? text.split(/\s+/).length : 0;
+/* الوضع الليلي */
 
-  document.getElementById("wordResult").textContent =
-    "عدد الكلمات: " + words +
-    " | عدد الحروف: " + text.length;
+function toggleDark(){
+  document.body.classList.toggle("dark");
+
+  localStorage.setItem(
+    "zentroTheme",
+    document.body.classList.contains("dark")
+      ? "dark"
+      : "light"
+  );
 }
 
+function loadTheme(){
+  const theme = localStorage.getItem("zentroTheme");
+
+  if(theme === "dark"){
+    document.body.classList.add("dark");
+  }
+}
+
+
+/* عداد الكلمات */
+
+function countText(){
+
+  const text =
+    document.getElementById("textInput").value.trim();
+
+  const characters =
+    document.getElementById("textInput").value.length;
+
+  const words =
+    text === ""
+      ? 0
+      : text.split(/\s+/).length;
+
+  document.getElementById("wordResult").textContent =
+    "عدد الكلمات: " +
+    words +
+    " | عدد الحروف: " +
+    characters;
+}
+
+
+/* مولد كلمة المرور */
+
 function generatePassword(){
-  const chars =
+
+  const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
 
   let password = "";
 
-  for(let i = 0; i < 12; i++){
-    password += chars.charAt(
-      Math.floor(Math.random() * chars.length)
+  for(let i = 0; i < 14; i++){
+    password += characters.charAt(
+      Math.floor(
+        Math.random() * characters.length
+      )
     );
   }
 
-  document.getElementById("passwordResult").textContent = password;
+  document.getElementById("passwordResult").textContent =
+    password;
 }
 
+
 function copyPassword(){
+
   const password =
     document.getElementById("passwordResult").textContent;
 
-  if(password && password !== "اضغط على إنشاء كلمة مرور"){
+  if(
+    password &&
+    password !== "اضغط على إنشاء كلمة مرور"
+  ){
+
     navigator.clipboard.writeText(password);
-    alert("تم النسخ ✅");
+
+    alert("تم نسخ كلمة المرور ✅");
   }
 }
 
+
+/* الآلة الحاسبة */
+
 function calculate(){
+
   const input =
     document.getElementById("calcInput").value;
 
   try{
-    const result = Function(
-      '"use strict"; return (' + input + ')'
-    )();
+
+    if(
+      !/^[0-9+\-*/().\s]+$/.test(input)
+    ){
+      throw new Error();
+    }
+
+    const result =
+      Function(
+        '"use strict"; return (' +
+        input +
+        ')'
+      )();
 
     document.getElementById("calcResult").textContent =
       "النتيجة: " + result;
 
   }catch(error){
+
     document.getElementById("calcResult").textContent =
-      "⚠️ عملية حسابية غير صحيحة";
+      "❌ أدخل عملية حسابية صحيحة";
   }
 }
 
+
+/* حاسبة العمر */
+
 function calculateAge(){
+
   const birth =
     document.getElementById("birthDate").value;
 
   if(!birth){
+
     document.getElementById("ageResult").textContent =
-      "⚠️ اختر تاريخ ميلادك أولاً";
+      "❌ اختر تاريخ الميلاد";
+
     return;
   }
 
-  const birthDate = new Date(birth);
-  const today = new Date();
+  const birthDate =
+    new Date(birth);
+
+  const today =
+    new Date();
 
   let age =
     today.getFullYear() -
     birthDate.getFullYear();
 
-  const month =
+  const monthDifference =
     today.getMonth() -
     birthDate.getMonth();
 
   if(
-    month < 0 ||
-    (month === 0 &&
-    today.getDate() < birthDate.getDate())
+    monthDifference < 0 ||
+    (
+      monthDifference === 0 &&
+      today.getDate() <
+      birthDate.getDate()
+    )
   ){
     age--;
   }
 
   document.getElementById("ageResult").textContent =
-    "عمرك: " + age + " سنة 🎉";
+    "عمرك: " +
+    age +
+    " سنة 🎉";
 }
 
-function generateRandomNumber(){
+
+/* رقم عشوائي */
+
+function generateRandom(){
+
   const number =
-    Math.floor(Math.random() * 1000000) + 1;
+    Math.floor(
+      Math.random() * 1000000
+    );
 
   document.getElementById("randomResult").textContent =
-    "🎲 الرقم العشوائي: " + number;
+    "🎲 " + number;
 }
 
+
+/* مولد اللون */
+
 function generateColor(){
+
   const color =
     "#" +
-    Math.floor(Math.random() * 16777215)
+    Math.floor(
+      Math.random() *
+      16777215
+    )
     .toString(16)
     .padStart(6,"0");
 
   const result =
     document.getElementById("colorResult");
 
-  result.textContent = "🎨 اللون: " + color;
-  result.style.background = color;
-  result.style.color = "#ffffff";
+  result.textContent =
+    color;
+
+  result.style.background =
+    color;
+
+  result.style.color =
+    "#ffffff";
 }
 
+
+/* مولد الهاشتاغ */
+
 function generateHashtags(){
-  const input =
-    document.getElementById("hashtagInput").value.trim();
 
-  const result =
-    document.getElementById("hashtagResult");
+  const topic =
+    document
+      .getElementById("hashtagInput")
+      .value
+      .trim()
+      .replace(/\s+/g,"");
 
-  if(!input){
-    result.textContent = "⚠️ اكتب موضوعاً أولاً";
+  if(!topic){
+
+    document.getElementById("hashtagResult").textContent =
+      "❌ اكتب موضوعاً أولاً";
+
     return;
   }
 
-  const word = input.replace(/\s+/g,"");
+  const hashtags =
+    "#" + topic +
+    " #" + topic + "2026" +
+    " #" + topic + "Daily" +
+    " #Trending" +
+    " #ZENTRO";
 
-  result.textContent =
-    "#" + word +
-    " #" + word + "2026" +
-    " #" + word + "viral" +
-    " #" + word + "trending";
+  document.getElementById("hashtagResult").textContent =
+    hashtags;
 }
 
-function toggleDark(){
-  document.body.classList.toggle("dark");
-}
 
-function toggleLanguage(){
-  alert("ميزة تغيير اللغة سيتم تطويرها قريباً 🌍");
-}
-function searchTools(){
-  const search =
-    document.getElementById("searchInput")
-    .value
-    .toLowerCase();
+/* رابط واتساب */
 
-  const cards =
-    document.querySelectorAll(".card");
+function generateWhatsApp(){
 
-  cards.forEach(function(card){
-    const text = card.textContent.toLowerCase();
-
-    card.style.display =
-      text.includes(search) ? "block" : "none";
-  });
-}
-
-function generateRandomNumber(){
-  const number = Math.floor(Math.random() * 1000000) + 1;
-
-  document.getElementById("randomResult").textContent =
-    "🎲 الرقم العشوائي: " + number;
-}
-
-function generateColor(){
-  const color =
-    "#" + Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6,"0");
-
-  const result =
-    document.getElementById("colorResult");
-
-  result.textContent = "🎨 اللون: " + color;
-  result.style.background = color;
-  result.style.color = "#ffffff";
-}
-
-function generateHashtags(){
-  const input =
-    document.getElementById("hashtagInput").value.trim();
-
-  const result =
-    document.getElementById("hashtagResult");
-
-  if(!input){
-    result.textContent = "⚠️ اكتب موضوعاً أولاً";
-    return;
-  }
-
-  const word = input.replace(/\s+/g,"");
-
-  result.textContent =
-    "#" + word +
-    " #" + word + "2026" +
-    " #" + word + "viral" +
-    " #" + word + "trending";
-}
-
-function toUpper(){
-  const text =
-    document.getElementById("caseInput").value;
-
-  document.getElementById("caseResult").textContent =
-    text.toUpperCase();
-}
-
-function toLower(){
-  const text =
-    document.getElementById("caseInput").value;
-
-  document.getElementById("caseResult").textContent =
-    text.toLowerCase();
-}
-
-function generateWhatsAppLink(){
-  const number =
-    document.getElementById("whatsappNumber").value.replace(/\D/g,"");
+  let number =
+    document
+      .getElementById("whatsappNumber")
+      .value
+      .replace(/\D/g,"");
 
   const message =
-    document.getElementById("whatsappMessage").value;
+    document
+      .getElementById("whatsappMessage")
+      .value;
+
+  if(!number){
+
+    document.getElementById("whatsappResult").textContent =
+      "❌ أدخل رقم الهاتف";
+
+    return;
+  }
+
+  const link =
+    "https://wa.me/" +
+    number +
+    "?text=" +
+    encodeURIComponent(message);
 
   const result =
     document.getElementById("whatsappResult");
 
-  if(!number){
-    result.textContent = "⚠️ اكتب رقم الهاتف أولاً";
-    return;
-  }
-
-  const link =
-    "https://wa.me/" + number +
-    "?text=" + encodeURIComponent(message);
-
   result.innerHTML =
-    '<a href="' + link + '" target="_blank">📱 فتح محادثة واتساب</a>';
-}
-
-let timerInterval;
-
-function startTimer(){
-  let seconds = parseInt(
-    document.getElementById("timerSeconds").value
-  );
-
-  const result =
-    document.getElementById("timerResult");
-
-  if(!seconds || seconds < 1){
-    result.textContent = "⚠️ أدخل عدد ثوانٍ صحيح";
-    return;
-  }
-
-  clearInterval(timerInterval);
-
-  result.textContent =
-    "⏱️ الوقت المتبقي: " + seconds + " ثانية";
-
-  timerInterval = setInterval(function(){
-    seconds--;
-
-    result.textContent =
-      "⏱️ الوقت المتبقي: " + seconds + " ثانية";
-
-    if(seconds <= 0){
-      clearInterval(timerInterval);
-      result.textContent = "🎉 انتهى الوقت!";
-    }
-  },1000);
-}
-function calculateDays(){
-  const start =
-    document.getElementById("startDate").value;
-
-  const end =
-    document.getElementById("endDate").value;
-
-  const result =
-    document.getElementById("daysResult");
-
-  if(!start || !end){
-    result.textContent =
-      "⚠️ اختر التاريخين أولاً";
-    return;
-  }
-
-  const startDate = new Date(start);
-  const endDate = new Date(end);
-
-  const difference =
-    Math.abs(endDate - startDate);
-
-  const days =
-    Math.ceil(difference / (1000 * 60 * 60 * 24));
-
-  result.textContent =
-    "📅 الفرق بين التاريخين: " +
-    days + " يوم";
+    '<a href="' +
+    link +
+    '" target="_blank">' +
+    link +
+    "</a>";
 }
 
 
-function checkPasswordStrength(){
-  const password =
-    document.getElementById("strengthInput").value;
+/* حاسبة الربح */
 
-  const result =
-    document.getElementById("strengthResult");
+function calculateProfit(){
 
-  let score = 0;
-
-  if(password.length >= 8) score++;
-  if(/[A-Z]/.test(password)) score++;
-  if(/[a-z]/.test(password)) score++;
-  if(/[0-9]/.test(password)) score++;
-  if(/[^A-Za-z0-9]/.test(password)) score++;
-
-  if(password.length === 0){
-    result.textContent =
-      "⚠️ اكتب كلمة مرور أولاً";
-  }else if(score <= 2){
-    result.textContent =
-      "🔴 كلمة المرور ضعيفة";
-  }else if(score <= 4){
-    result.textContent =
-      "🟡 كلمة المرور متوسطة";
-  }else{
-    result.textContent =
-      "🟢 كلمة المرور قوية جداً";
-  }
-}
-
-
-function generateUsername(){
-  const input =
-    document.getElementById("usernameInput")
-    .value
-    .trim();
-
-  const result =
-    document.getElementById("usernameResult");
-
-  if(!input){
-    result.textContent =
-      "⚠️ اكتب اسماً أو كلمة أولاً";
-    return;
-  }
-
-  const word =
-    input.replace(/\s+/g,"").toLowerCase();
-
-  const number =
-    Math.floor(Math.random() * 9999) + 1;
-
-  result.textContent =
-    "👤 @" + word +
-    "\n👤 @" + word + number +
-    "\n👤 " + word + "_official" +
-    "\n👤 the_" + word;
-}function calculateProfit(){
   const cost =
-    parseFloat(document.getElementById("costPrice").value);
-
-  const sell =
-    parseFloat(document.getElementById("sellPrice").value);
-
-  const result =
-    document.getElementById("profitResult");
-
-  if(isNaN(cost) || isNaN(sell)){
-    result.textContent =
-      "⚠️ أدخل سعر التكلفة وسعر البيع";
-    return;
-  }
-
-  const profit = sell - cost;
-
-  const margin = cost > 0
-    ? ((profit / cost) * 100).toFixed(2)
-    : 0;
-
-  result.textContent =
-    "💰 الربح: " + profit +
-    " | 📊 نسبة الربح: " + margin + "%";
-}
-  function calculateDiscount(){
-  const price =
-    parseFloat(document.getElementById("discountPrice").value);
-
-  const percent =
-    parseFloat(document.getElementById("discountPercent").value);
-
-  const result =
-    document.getElementById("discountResult");
-
-  if(isNaN(price) || isNaN(percent)){
-    result.textContent =
-      "⚠️ أدخل السعر ونسبة الخصم";
-    return;
-  }
-
-  const discount =
-    price * percent / 100;
-
-  const finalPrice =
-    price - discount;
-
-  result.textContent =
-    "🏷️ قيمة الخصم: " + discount.toFixed(2) +
-    " | 💰 السعر بعد الخصم: " +
-    finalPrice.toFixed(2);
-  }
-  function generateInvoice(){
-  const name =
-    document.getElementById("invoiceName").value.trim();
-
-  const item =
-    document.getElementById("invoiceItem").value.trim();
-
-  const price =
-    document.getElementById("invoicePrice").value;
-
-  const result =
-    document.getElementById("invoiceResult");
-
-  if(!name || !item || !price){
-    result.textContent =
-      "⚠️ أدخل جميع بيانات الفاتورة";
-    return;
-  }
-
-  result.innerHTML =
-    "📄 فاتورة ZENTRO<br><br>" +
-    "👤 العميل: " + name + "<br>" +
-    "📦 المنتج/الخدمة: " + item + "<br>" +
-    "💰 السعر: " + price;
-  }
- async function convertCurrency(){
-  const amount = parseFloat(
-    document.getElementById("currencyAmount").value
-  );
-
-  const target =
-    document.getElementById("currencySelect").value;
-
-  const result =
-    document.getElementById("currencyResult");
-
-  if(isNaN(amount) || amount <= 0){
-    result.textContent = "⚠️ أدخل مبلغاً صحيحاً";
-    return;
-  }
-
-  result.textContent = "⏳ جاري جلب سعر الصرف...";
-
-  try{
-    const response = await fetch(
-      "https://api.frankfurter.dev/v2/rate/USD/" + target
+    parseFloat(
+      document.getElementById("costPrice").value
     );
 
-    const data = await response.json();
-
-    if(!response.ok){
-      throw new Error("API Error");
-    }
-
-    const converted = amount * data.rate;
-
-    result.textContent =
-      "💱 " + amount + " USD = " +
-      converted.toFixed(2) + " " + target;
-
-  }catch(error){
-    result.textContent =
-      "⚠️ تعذر جلب سعر الصرف";
-  }
-}
-
-function calculateTax(){
-  const price = parseFloat(
-    document.getElementById("taxPrice").value
-  );
-
-  const rate = parseFloat(
-    document.getElementById("taxRate").value
-  );
-
-  const result =
-    document.getElementById("taxResult");
-
-  if(isNaN(price) || isNaN(rate)){
-    result.textContent =
-      "⚠️ أدخل السعر ونسبة الضريبة";
-    return;
-  }
-
-  const tax = price * rate / 100;
-  const total = price + tax;
-
-  result.textContent =
-    "🧾 قيمة الضريبة: " + tax.toFixed(2) +
-    " | 💰 السعر النهائي: " + total.toFixed(2);
-}
-
-function calculateBreakEven(){
-  const fixed = parseFloat(
-    document.getElementById("fixedCosts").value
-  );
-
-  const price = parseFloat(
-    document.getElementById("sellingPrice").value
-  );
-
-  const variable = parseFloat(
-    document.getElementById("variableCost").value
-  );
-
-  const result =
-    document.getElementById("breakEvenResult");
-
-  if(isNaN(fixed) || isNaN(price) || isNaN(variable)){
-    result.textContent =
-      "⚠️ أدخل جميع البيانات";
-    return;
-  }
-
-  if(price <= variable){
-    result.textContent =
-      "⚠️ يجب أن يكون سعر البيع أكبر من تكلفة الوحدة";
-    return;
-  }
-
-  const units =
-    fixed / (price - variable);
-
-  result.textContent =
-    "📊 نقطة التعادل: تحتاج لبيع " +
-    Math.ceil(units) + " وحدة";
-}
-
-function calculateBusinessProfit(){
-  const revenue = parseFloat(
-    document.getElementById("revenue").value
-  );
-
-  const expenses = parseFloat(
-    document.getElementById("expenses").value
-  );
-
-  const result =
-    document.getElementById("businessProfitResult");
-
-  if(isNaN(revenue) || isNaN(expenses)){
-    result.textContent =
-      "⚠️ أدخل الإيرادات والمصاريف";
-    return;
-  }
-
-  const profit = revenue - expenses;
-
-  if(profit >= 0){
-    result.textContent =
-      "💰 صافي الربح: " + profit.toFixed(2);
-  }else{
-    result.textContent =
-      "📉 الخسارة: " +
-      Math.abs(profit).toFixed(2);
-  }
-     } 
- function calculateGrowth(){
-  const start = parseFloat(document.getElementById("growthStart").value);
-  const rate = parseFloat(document.getElementById("growthRate").value);
-  const months = parseInt(document.getElementById("growthMonths").value);
-
-  const result = document.getElementById("growthResult");
-
-  if(isNaN(start) || isNaN(rate) || isNaN(months) || months < 1){
-    result.textContent = "⚠️ أدخل جميع البيانات بشكل صحيح";
-    return;
-  }
-
-  const finalProfit = start * Math.pow(1 + rate / 100, months);
-
-  result.textContent =
-    "📈 الربح المتوقع: " + finalProfit.toFixed(2) +
-    " | 💰 الزيادة: " + (finalProfit - start).toFixed(2);
-}
-
-
-function calculateSalary(){
-  const base =
-    parseFloat(document.getElementById("salaryBase").value) || 0;
-
-  const bonus =
-    parseFloat(document.getElementById("salaryBonus").value) || 0;
-
-  const deduction =
-    parseFloat(document.getElementById("salaryDeduction").value) || 0;
-
-  const result = document.getElementById("salaryResult");
-
-  if(base <= 0){
-    result.textContent = "⚠️ أدخل الراتب الأساسي";
-    return;
-  }
-
-  const total = base + bonus - deduction;
-
-  result.textContent =
-    "👥 الراتب النهائي: " + total.toFixed(2);
-}
-function calculateVAT(){
-  const price =
-    parseFloat(document.getElementById("vatPrice").value);
-
-  const rate =
-    parseFloat(document.getElementById("vatRate").value);
-
-  const result =
-    document.getElementById("vatResult");
-
-  if(isNaN(price) || isNaN(rate)){
-    result.textContent =
-      "⚠️ أدخل السعر ونسبة الضريبة";
-    return;
-  }
-
-  const vat = price * rate / 100;
-  const total = price + vat;
-
-  result.textContent =
-    "🧾 قيمة الضريبة: " + vat.toFixed(2) +
-    " | 💰 الإجمالي: " + total.toFixed(2);
-}
-
-
-function generateQuote(){
-  const client =
-    document.getElementById("quoteClient").value.trim();
-
-  const service =
-    document.getElementById("quoteService").value.trim();
-
-  const price =
-    document.getElementById("quotePrice").value;
-
-  const result =
-    document.getElementById("quoteResult");
-
-  if(!client || !service || !price){
-    result.textContent =
-      "⚠️ أدخل جميع البيانات";
-    return;
-  }
-
-  result.textContent =
-    "📝 عرض سعر\n" +
-    "👤 العميل: " + client +
-    "\n📦 المنتج/الخدمة: " + service +
-    "\n💰 السعر: " + price;
-}
-
-
-function calculateLoan(){
-  const amount =
-    parseFloat(document.getElementById("loanAmount").value);
-
-  const annualRate =
-    parseFloat(document.getElementById("loanRate").value);
-
-  const months =
-    parseInt(document.getElementById("loanMonths").value);
-
-  const result =
-    document.getElementById("loanResult");
+  const selling =
+    parseFloat(
+      document.getElementById("sellingPrice").value
+    );
 
   if(
-    isNaN(amount) ||
-    isNaN(annualRate) ||
-    isNaN(months) ||
-    amount <= 0 ||
-    months <= 0
+    isNaN(cost) ||
+    isNaN(selling)
   ){
-    result.textContent =
-      "⚠️ أدخل بيانات القرض بشكل صحيح";
+
+    document.getElementById("profitResult").textContent =
+      "❌ أدخل الأسعار";
+
     return;
   }
 
-  const monthlyRate =
-    annualRate / 100 / 12;
+  const profit =
+    selling - cost;
 
-  let monthlyPayment;
+  const margin =
+    cost !== 0
+      ? (profit / cost) * 100
+      : 0;
 
-  if(monthlyRate === 0){
-    monthlyPayment = amount / months;
-  }else{
-    monthlyPayment =
-      amount *
-      (monthlyRate * Math.pow(1 + monthlyRate, months)) /
-      (Math.pow(1 + monthlyRate, months) - 1);
-  }
+  document.getElementById("profitResult").textContent =
+    "الربح: " +
+    profit.toFixed(2) +
+    " | هامش الربح: " +
+    margin.toFixed(2) +
+    "%";
+}
 
-  const total =
-    monthlyPayment * months;
 
-  result.textContent =
-    "🏦 القسط الشهري: " +
-    monthlyPayment.toFixed(2) +
-    " | 💰 إجمالي السداد: " +
-    total.toFixed(2);
-    }
- function convertUnit(){
-  const value = parseFloat(document.getElementById("unitValue").value);
-  const type = document.getElementById("unitType").value;
-  const result = document.getElementById("unitResult");
+/* حاسبة الخصم */
 
-  if(isNaN(value)){
-    result.textContent = "⚠️ أدخل قيمة صحيحة";
+function calculateDiscount(){
+
+  const price =
+    parseFloat(
+      document.getElementById("originalPrice").value
+    );
+
+  const discount =
+    parseFloat(
+      document.getElementById("discountPercent").value
+    );
+
+  if(
+    isNaN(price) ||
+    isNaN(discount)
+  ){
+
+    document.getElementById("discountResult").textContent =
+      "❌ أدخل السعر ونسبة الخصم";
+
     return;
   }
 
-  let output = "";
+  const amount =
+    price * discount / 100;
 
-  if(type === "kmToM") output = value * 1000 + " متر";
-  if(type === "mToKm") output = value / 1000 + " كيلومتر";
-  if(type === "kgToG") output = value * 1000 + " غرام";
-  if(type === "gToKg") output = value / 1000 + " كيلوغرام";
-  if(type === "cToF") output = (value * 9 / 5 + 32).toFixed(2) + " °F";
-  if(type === "fToC") output = ((value - 32) * 5 / 9).toFixed(2) + " °C";
+  const finalPrice =
+    price - amount;
 
-  result.textContent = "📐 النتيجة: " + output;
+  document.getElementById("discountResult").textContent =
+    "قيمة الخصم: " +
+    amount.toFixed(2) +
+    " | السعر بعد الخصم: " +
+    finalPrice.toFixed(2);
 }
 
 
-function cleanText(){
-  const text = document.getElementById("cleanText").value;
-  const result = document.getElementById("cleanTextResult");
+/* البحث */
 
-  const cleaned = text.replace(/\s+/g, " ").trim();
+function searchTools(){
 
-  result.textContent =
-    cleaned || "⚠️ اكتب نصاً أولاً";
-}
-
-
-function generateQR(){
-  const text = document.getElementById("qrText").value.trim();
-  const result = document.getElementById("qrResult");
-
-  if(!text){
-    result.textContent = "⚠️ أدخل نصاً أو رابطاً";
-    return;
-  }
-
-  result.innerHTML =
-    '<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' +
-    encodeURIComponent(text) +
-    '" alt="QR Code">';
-}
-
-
-function showWorldTime(){
-  const zone = document.getElementById("worldCity").value;
-
-  const time = new Date().toLocaleString("ar-EG", {
-    timeZone: zone,
-    dateStyle: "full",
-    timeStyle: "medium"
-  });
-
-  document.getElementById("worldTimeResult").textContent =
-    "🕒 " + time;
-}
-
-
-function calculateDateDifference(){
-  const start = document.getElementById("dateStart").value;
-  const end = document.getElementById("dateEnd").value;
-  const result = document.getElementById("dateDifferenceResult");
-
-  if(!start || !end){
-    result.textContent = "⚠️ اختر التاريخين";
-    return;
-  }
-
-  const difference =
-    Math.abs(new Date(end) - new Date(start)) /
-    (1000 * 60 * 60 * 24);
-
-  result.textContent =
-    "📅 الفرق: " + Math.round(difference) + " يوم";
-}
-
-
-function generateCV(){
-  const name = document.getElementById("cvName").value.trim();
-  const job = document.getElementById("cvJob").value.trim();
-  const skills = document.getElementById("cvSkills").value.trim();
-  const experience =
-    document.getElementById("cvExperience").value.trim();
-
-  const result = document.getElementById("cvResult");
-
-  if(!name || !job){
-    result.textContent = "⚠️ أدخل الاسم والمهنة على الأقل";
-    return;
-  }
-
-  result.textContent =
-    "📝 السيرة الذاتية\n\n" +
-    "👤 الاسم: " + name +
-    "\n💼 التخصص: " + job +
-    "\n⭐ المهارات: " + skills +
-    "\n📌 الخبرات: " + experience;
-}
-
-
-function encodeText(){
-  const text = document.getElementById("cryptoText").value;
-  const result = document.getElementById("cryptoResult");
-
-  if(!text){
-    result.textContent = "⚠️ اكتب نصاً أولاً";
-    return;
-  }
-
-  result.textContent =
-    btoa(unescape(encodeURIComponent(text)));
-}
-
-
-function decodeText(){
-  const text = document.getElementById("cryptoText").value;
-  const result = document.getElementById("cryptoResult");
-
-  try{
-    result.textContent =
-      decodeURIComponent(escape(atob(text)));
-  }catch(error){
-    result.textContent =
-      "⚠️ النص المشفر غير صحيح";
-  }
-}
-
-
-function generateTelegramLink(){
-  const username =
-    document.getElementById("telegramUser")
-    .value.trim()
-    .replace("@", "");
-
-  const result =
-    document.getElementById("telegramResult");
-
-  if(!username){
-    result.textContent =
-      "⚠️ أدخل اسم المستخدم";
-    return;
-  }
-
-  const link =
-    "https://t.me/" +
-    encodeURIComponent(username);
-
-  result.innerHTML =
-    '<a href="' + link +
-    '" target="_blank">📱 فتح رابط Telegram</a>';
-}
-
-
-function convertImage(){
-  const file =
-    document.getElementById("imageInput").files[0];
-
-  const format =
-    document.getElementById("imageFormat").value;
-
-  const result =
-    document.getElementById("imageResult");
-
-  if(!file){
-    result.textContent =
-      "⚠️ اختر صورة أولاً";
-    return;
-  }
-
-  const image = new Image();
-  const reader = new FileReader();
-
-  reader.onload = function(event){
-
-    image.onload = function(){
-
-      const canvas =
-        document.createElement("canvas");
-
-      canvas.width = image.width;
-      canvas.height = image.height;
-
-      const ctx =
-        canvas.getContext("2d");
-
-      if(format === "image/jpeg"){
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(
-          0,
-          0,
-          canvas.width,
-          canvas.height
-        );
-      }
-
-      ctx.drawImage(image, 0, 0);
-
-      const extension =
-        format === "image/png"
-        ? "png"
-        : "jpg";
-
-      const link =
-        document.createElement("a");
-
-      link.href =
-        canvas.toDataURL(format, 0.92);
-
-      link.download =
-        "zentro-image." + extension;
-
-      link.textContent =
-        "⬇️ حفظ الصورة المحولة";
-
-      result.innerHTML = "";
-      result.appendChild(link);
-    };
-
-    image.src = event.target.result;
-  };
-
-  reader.readAsDataURL(file);
-  } 
-  function searchTools(){
-  const input =
-    document.getElementById("searchInput").value
-    .toLowerCase()
-    .trim();
+  const search =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase();
 
   const tools =
-    document.querySelectorAll(".tool-box");
+    document.querySelectorAll(
+      ".tool-card"
+    );
 
   tools.forEach(function(tool){
+
     const text =
       tool.textContent.toLowerCase();
 
-    if(text.includes(input)){
-      tool.style.display = "";
+    if(
+      text.includes(search)
+    ){
+      tool.style.display =
+        "block";
     }else{
-      tool.style.display = "none";
+      tool.style.display =
+        "none";
     }
   });
-  }function toggleDark(){
-  document.body.classList.toggle("dark");
-
-  const button =
-    document.querySelector(".dark-btn");
-
-  if(document.body.classList.contains("dark")){
-    button.textContent = "☀️";
-    localStorage.setItem("zentroTheme", "dark");
-  }else{
-    button.textContent = "🌙";
-    localStorage.setItem("zentroTheme", "light");
-  }
 }
 
-function loadTheme(){
-  const savedTheme =
-    localStorage.getItem("zentroTheme");
 
-  if(savedTheme === "dark"){
-    document.body.classList.add("dark");
+/* العودة للأعلى */
+
+function scrollToTop(){
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+window.addEventListener(
+  "scroll",
+  function(){
 
     const button =
-      document.querySelector(".dark-btn");
+      document.getElementById("topButton");
 
-    if(button){
-      button.textContent = "☀️";
+    if(
+      window.scrollY > 300
+    ){
+      button.style.display =
+        "block";
+    }else{
+      button.style.display =
+        "none";
     }
   }
-}
+);
 
-loadTheme();
-function scrollToTop(){
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-}
 
-window.addEventListener("scroll", function(){
-  const topButton =
-    document.getElementById("topButton");
+/* اللغات */
 
-  if(window.scrollY > 300){
-    topButton.style.display = "block";
-  }else{
-    topButton.style.display = "none";
-  }
-}); 
 const translations = {
-  ar: {
-    heroTitle: "كل أدواتك في مكان واحد ⚡",
-    heroText: "ZENTRO منصة عالمية للأدوات الرقمية المجانية التي تعمل مباشرة من المتصفح.",
-    searchPlaceholder: "ابحث عن أداة...",
-    searchButton: "🔍 بحث",
-    freeTools: "أداة مجانية",
-    available: "متاح دائماً",
-    global: "عالمي",
-    fastFree: "سريع ومجاني",
-    basicTools: "🔥 الأدوات الأساسية",
-    basicToolsText: "أدوات مجانية تعمل مباشرة داخل الموقع"
+
+  ar:{
+    heroTitle:
+      "كل أدواتك في مكان واحد ⚡",
+
+    heroText:
+      "ZENTRO منصة عالمية للأدوات الرقمية المجانية والمميزة التي تعمل مباشرة من المتصفح."
   },
 
-  en: {
-    heroTitle: "All your tools in one place ⚡",
-    heroText: "ZENTRO is a global platform for free digital tools that work directly in your browser.",
-    searchPlaceholder: "Search for a tool...",
-    searchButton: "🔍 Search",
-    freeTools: "Free tools",
-    available: "Available 24/7",
-    global: "Global",
-    fastFree: "Fast & Free",
-    basicTools: "🔥 Essential Tools",
-    basicToolsText: "Free tools that work directly on the website"
+  en:{
+    heroTitle:
+      "All your tools in one place ⚡",
+
+    heroText:
+      "ZENTRO is a global platform for free and premium digital tools that work directly in your browser."
   }
 };
 
+
 function changeLanguage(){
+
   const language =
-    document.getElementById("languageSelect").value;
+    document
+      .getElementById("languageSelect")
+      .value;
 
-  localStorage.setItem("zentroLanguage", language);
+  localStorage.setItem(
+    "zentroLanguage",
+    language
+  );
 
-  const selectedLanguage =
-    translations[language] || translations.en;
+  const data =
+    translations[language];
 
-  document.querySelectorAll("[data-i18n]").forEach(function(element){
-    const key = element.getAttribute("data-i18n");
+  document
+    .getElementById("heroTitle")
+    .textContent =
+    data.heroTitle;
 
-    if(selectedLanguage[key]){
-      element.textContent = selectedLanguage[key];
-    }
-  });
+  document
+    .getElementById("heroText")
+    .textContent =
+    data.heroText;
 
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(function(element){
-    const key =
-      element.getAttribute("data-i18n-placeholder");
+  document.documentElement.lang =
+    language;
 
-    if(selectedLanguage[key]){
-      element.placeholder = selectedLanguage[key];
-    }
-  });
-
-  document.documentElement.lang = language;
   document.documentElement.dir =
-    language === "ar" ? "rtl" : "ltr";
+    language === "ar"
+      ? "rtl"
+      : "ltr";
 }
 
-function loadLanguage(){
-  const savedLanguage =
-    localStorage.getItem("zentroLanguage") || "ar";
 
-  document.getElementById("languageSelect").value =
-    savedLanguage;
+function loadLanguage(){
+
+  const language =
+    localStorage.getItem(
+      "zentroLanguage"
+    ) || "ar";
+
+  document
+    .getElementById("languageSelect")
+    .value =
+    language;
 
   changeLanguage();
 }
 
+
+loadTheme();
 loadLanguage();
+
 </script>
-<button id="topButton" onclick="scrollToTop()">⬆️</button>
+
 </body>
 </html>
-
