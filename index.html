@@ -299,25 +299,36 @@ footer{
   <div class="logo">ZEN<span>TRO</span> ⚡</div>
 
   <div class="nav-actions">
-    <button class="light" onclick="toggleLanguage()">🌍 اللغة</button>
+  <select id="languageSelect" class="light" onchange="changeLanguage()">
+  <option value="ar">🌍 العربية</option>
+  <option value="en">🇬🇧 English</option>
+  <option value="tr">🇹🇷 Türkçe</option>
+  <option value="de">🇩🇪 Deutsch</option>
+  <option value="fr">🇫🇷 Français</option>
+  <option value="es">🇪🇸 Español</option>
+  <option value="ru">🇷🇺 Русский</option>
+  <option value="zh">🇨🇳 中文</option>
+  </select>
     <button class="dark-btn" onclick="toggleDark()">🌙</button>
   </div>
 </nav>
 
 <div class="hero">
-  <h1>كل أدواتك في مكان واحد ⚡</h1>
+  <h1 data-i18n="heroTitle">كل أدواتك في مكان واحد ⚡</h1>
 
-  <p>
-    ZENTRO منصة عالمية للأدوات الرقمية المجانية التي تعمل مباشرة من المتصفح.
-  </p>
+<p data-i18n="heroText">
+  ZENTRO منصة عالمية للأدوات الرقمية المجانية التي تعمل مباشرة من المتصفح.
+</p>
+<div class="search-box">
+  <input id="searchInput"
+    placeholder="ابحث عن أداة..."
+    data-i18n-placeholder="searchPlaceholder"
+    oninput="searchTools()">
 
-  <div class="search-box">
-    <input id="searchInput"
-      placeholder="ابحث عن أداة..."
-      oninput="searchTools()">
-
-    <button onclick="searchTools()">🔍 بحث</button>
-  </div>
+  <button onclick="searchTools()" data-i18n="searchButton">
+    🔍 بحث
+  </button>
+</div>
 </div>
 
 </div>
@@ -326,30 +337,33 @@ footer{
 <main class="container">
 
 <div class="stats">
+<div class="stats">
   <div class="stat">
     <b>12+</b>
-    <span>أداة مجانية</span>
+    <span data-i18n="freeTools">أداة مجانية</span>
   </div>
 
   <div class="stat">
     <b>24/7</b>
-    <span>متاح دائماً</span>
+    <span data-i18n="available">متاح دائماً</span>
   </div>
 
   <div class="stat">
     <b>🌍</b>
-    <span>عالمي</span>
+    <span data-i18n="global">عالمي</span>
   </div>
 
   <div class="stat">
     <b>⚡</b>
-    <span>سريع ومجاني</span>
+    <span data-i18n="fastFree">سريع ومجاني</span>
   </div>
 </div>
 <section class="section">
+<h2 data-i18n="basicTools">🔥 الأدوات الأساسية</h2>
 
-  <h2>🔥 الأدوات الأساسية</h2>
-  <p class="muted">أدوات مجانية تعمل مباشرة داخل الموقع</p>
+<p class="muted" data-i18n="basicToolsText">
+  أدوات مجانية تعمل مباشرة داخل الموقع
+</p>
 <div class="grid">
 
   <div class="card" onclick="document.getElementById('wordTool').scrollIntoView({behavior:'smooth'})">
@@ -2128,7 +2142,40 @@ window.addEventListener("scroll", function(){
   }else{
     topButton.style.display = "none";
   }
-});  
+}); 
+const translations = {
+  ar: {
+    heroTitle: "كل أدواتك في مكان واحد ⚡",
+    heroText: "ZENTRO منصة عالمية للأدوات الرقمية المجانية التي تعمل مباشرة من المتصفح.",
+    searchPlaceholder: "ابحث عن أداة...",
+    searchButton: "🔍 بحث",
+    freeTools: "أداة مجانية",
+    available: "متاح دائماً",
+    global: "عالمي",
+    fastFree: "سريع ومجاني",
+    basicTools: "🔥 الأدوات الأساسية",
+    basicToolsText: "أدوات مجانية تعمل مباشرة داخل الموقع"
+  },
+
+  en: {
+    heroTitle: "All your tools in one place ⚡",
+    heroText: "ZENTRO is a global platform for free digital tools that work directly in your browser.",
+    searchPlaceholder: "Search for a tool...",
+    searchButton: "🔍 Search",
+    freeTools: "Free tools",
+    available: "Available 24/7",
+    global: "Global",
+    fastFree: "Fast & Free",
+    basicTools: "🔥 Essential Tools",
+    basicToolsText: "Free tools that work directly on the website"
+  }
+};
+
+function changeLanguage(){
+  const
+
+  alert("🌍 تم اختيار اللغة. الترجمة الكاملة سيتم إضافتها تدريجياً.");
+  }
 </script>
 <button id="topButton" onclick="scrollToTop()">⬆️</button>
 </body>
