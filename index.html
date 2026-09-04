@@ -1987,22 +1987,73 @@ function loadLanguage(){
 
 }
 function showPurchaseInfo(){
+function showPurchaseInfo(){
 
   document
     .getElementById("purchaseInfo")
     .innerHTML =
     `
-    💰 السعر: 3.99 USDT<br><br>
+    <div style="margin-top:20px;">
 
-    الشبكة: TRON (TRC20)<br><br>
+      <p>💰 السعر: <b>3.99 USDT</b></p>
 
-    عنوان الدفع:<br>
+      <p>🌐 الشبكة: <b>TRON (TRC20)</b></p>
 
-    TVejm8tumJxtmxCvxmMFTuBVyTvukeFame<br><br>
+      <p>💳 عنوان الدفع:</p>
 
-    ⚠️ أرسل USDT فقط عبر شبكة TRON (TRC20).
+      <p id="walletAddress"
+         style="word-break:break-all;font-weight:bold;">
+        TVejm8tumJxtmxCvxmMFTuBVyTvukeFame
+      </p>
+
+      <button
+        class="primary"
+        onclick="copyWalletAddress()">
+        📋 نسخ عنوان المحفظة
+      </button>
+
+      <p id="copyMessage"></p>
+
+      <p>
+        ⚠️ أرسل <b>USDT فقط</b>
+        عبر شبكة <b>TRON (TRC20)</b>.
+      </p>
+
+      <p>
+        📩 بعد الدفع، احتفظ بإثبات التحويل
+        وتواصل معنا لاستلام المنتج.
+      </p>
+
+    </div>
     `;
 
+}
+
+
+function copyWalletAddress(){
+
+  const address =
+    "TVejm8tumJxtmxCvxmMFTuBVyTvukeFame";
+
+  navigator.clipboard.writeText(address)
+    .then(function(){
+
+      document
+        .getElementById("copyMessage")
+        .textContent =
+        "✅ تم نسخ عنوان المحفظة";
+
+    })
+    .catch(function(){
+
+      document
+        .getElementById("copyMessage")
+        .textContent =
+        "❌ لم يتم النسخ، انسخ العنوان يدوياً";
+
+    });
+
+}
 }
 loadTheme();
 loadLanguage();
