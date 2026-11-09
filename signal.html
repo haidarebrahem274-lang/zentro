@@ -3,235 +3,331 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>مساعد التداول الذكي</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Headway Smart Assistant</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b1220;color:#fff;font-family:Arial,sans-serif;padding:15px}
-.container{max-width:520px;margin:auto}
+body{margin:0;padding:15px;background:#0b1220;color:#f4f7fb;font-family:Arial}
+main{max-width:650px;margin:auto}
 h1{text-align:center;color:#43d9a3}
-.subtitle{text-align:center;color:#9ba9bd}
-.card{background:#151f30;border:1px solid #29364a;border-radius:16px;padding:18px;margin-top:15px}
-label{display:block;margin:14px 0 8px}
-select,button{width:100%;padding:14px;border-radius:10px;font-size:16px;border:1px solid #34445c}
-select{background:#0c1727;color:white}
-button{margin-top:20px;background:#12a879;color:white;font-weight:bold;border:0}
-button:disabled{opacity:.6}
-#result{margin-top:18px;padding:15px;background:#0c1727;border-radius:12px;line-height:2;white-space:normal}
-.small{font-size:12px;color:#9ba9bd;line-height:1.8}
+.sub{text-align:center;color:#aab7ca}
+.card{background:#151f30;border:1px solid #29384d;border-radius:15px;padding:16px;margin:14px 0}
+label{display:block;margin:13px 0 7px}
+select,input,button{width:100%;padding:13px;border-radius:9px;font-size:15px}
+select,input{background:#0c1727;color:white;border:1px solid #34445c}
+button{border:0;background:#12a879;color:white;font-weight:bold;margin-top:15px}
+button:disabled{opacity:.5}
+.small{font-size:12px;color:#aab7ca;line-height:1.8}
+#status,#result{background:#0c1727;padding:13px;border-radius:10px;margin-top:12px;line-height:1.9;overflow-wrap:anywhere}
 .buy{color:#43d9a3;font-weight:bold}
-.sell{color:#ff7373;font-weight:bold}
+.sell{color:#ff7777;font-weight:bold}
 .wait{color:#ffd166;font-weight:bold}
+.row{display:flex;gap:8px;align-items:center}
+.row button{width:auto;flex:1}
 </style>
 </head>
 <body>
-<div class="container">
-<h1>مساعد التداول الذكي</h1>
-<p class="subtitle">تحليل الذهب وإظهار فرصة محتملة عند توفر الشروط</p>
+<main>
+<h1>مساعد تداول Headway</h1>
+<p class="sub">تحليل الأسواق المتاحة حسب أيام بونص Headway</p>
 
 <div class="card">
-<label>السوق</label>
-<select id="market">
-<option value="xau">الذهب XAUUSD</option>
-</select>
+  <div id="status">جارٍ تحميل قائمة الأسواق...</div>
 
-<label>الإطار الزمني</label>
-<select id="timeframe">
-<option value="5m">M5 - 5 دقائق</option>
-<option value="15m">M15 - 15 دقيقة</option>
-<option value="30m">M30 - 30 دقيقة</option>
-<option value="60m">H1 - ساعة</option>
-</select>
+  <label>مجموعة السوق</label>
+  <select id="group" onchange="filterSymbols()">
+    <option value="all">كل المجموعات</option>
+    <option value="Forex">الفوركس</option>
+    <option value="Stock">الأسهم</option>
+    <option value="Commodity">المعادن والطاقة</option>
+    <option value="Crypto">العملات الرقمية</option>
+    <option value="Index">المؤشرات</option>
+  </select>
 
-<button id="analyzeBtn" onclick="analyze()">حلّل السوق الآن</button>
-<div id="result">اختر الإطار الزمني واضغط زر التحليل.</div>
+  <label>ابحث عن أداة</label>
+  <input id="search" placeholder="مثلاً XAUUSD أو BTCUSD" oninput="filterSymbols()">
+
+  <label>اختر الأداة</label>
+  <select id="symbol"></select>
+
+  <label>الإطار الزمني للتحليل</label>
+  <select id="timeframe">
+    <option value="1m">M1 - دقيقة</option>
+    <option value="5m" selected>M5 - خمس دقائق</option>
+    <option value="15m">M15 - 15 دقيقة</option>
+    <option value="30m">M30 - 30 دقيقة</option>
+    <option value="1h">H1 - ساعة</option>
+    <option value="4h">H4 - أربع ساعات</option>
+  </select>
+
+  <button id="analyzeBtn" onclick="analyze()">حلّل السوق الآن</button>
+  <div id="result">اختر أداة واضغط تحليل.</div>
+</div>
+
+<div class="card">
+  <b>جدول مجموعات البونص</b>
+  <p class="small">
+  الاثنين والثلاثاء: الفوركس<br>
+  الأربعاء والخميس: الأسهم<br>
+  الجمعة: المعادن والنفط<br>
+  السبت والأحد: العملات الرقمية والمؤشرات الاصطناعية
+  </p>
+  <p class="small">هذا الفلتر مبني على جدول عرض بونص Headway، وليس تأكيداً بأن كل رمز ظاهر متاح في حسابك.</p>
 </div>
 
 <p class="small">
-مصدر البيانات: XAUS. السعر استرشادي وقد يختلف عن سعر وسيطك.
-الإشارات تجريبية وليست ضماناً للربح. لا تستخدمها قبل اختبارها على حساب تجريبي.
+مصدر الأسعار الخارجي: Biquote. قد تختلف الأسعار عن Headway.
+الإشارات تجريبية وليست توصية مضمونة. لا يتم تنفيذ أي صفقة تلقائياً.
 </p>
-</div>
+</main>
 
 <script>
-const API = "https://xaus.com/api/v1/";
+const API="https://biquote.io/api";
+let allSymbols=[];
+let currentDayGroup="";
+let allowedTypes=[];
+
+function bonusGroup(){
+  const day=new Date().getDay();
+  if(day===1 || day===2) return "Forex";
+  if(day===3 || day===4) return "Stock";
+  if(day===5) return "Commodity";
+  return "Weekend";
+}
+
+function groupName(type){
+  const t=String(type||"").toLowerCase();
+  if(t.includes("forex")) return "Forex";
+  if(t.includes("stock")) return "Stock";
+  if(t.includes("crypto")) return "Crypto";
+  if(t.includes("index") || t.includes("synthetic")) return "Index";
+  if(t.includes("commod") || t.includes("metal") || t.includes("energy")) return "Commodity";
+  return "Other";
+}
+
+function isBonusAllowed(item){
+  const g=groupName(item.type);
+  if(currentDayGroup==="Forex") return g==="Forex";
+  if(currentDayGroup==="Stock") return g==="Stock";
+  if(currentDayGroup==="Commodity") return g==="Commodity";
+  return g==="Crypto" || g==="Index";
+}
 
 async function getJSON(url){
-  const response = await fetch(url);
-  if(!response.ok) throw new Error("تعذر جلب بيانات السوق");
-  return await response.json();
+  const r=await fetch(url);
+  if(!r.ok) throw new Error("تعذر الاتصال بمصدر البيانات ("+r.status+")");
+  return await r.json();
 }
 
-async function getCandles(interval){
-  const ranges = {
-    "5m":"5d",
-    "15m":"5d",
-    "30m":"1mo",
-    "60m":"3mo"
-  };
-  const url = API + "chart?symbol=xau&range=" +
-    ranges[interval] + "&interval=" + interval;
-  const data = await getJSON(url);
-  const points = data.points || data.data || [];
-  return points
-    .map(c => ({
-      t:Number(c.t),
-      o:Number(c.o),
-      h:Number(c.h),
-      l:Number(c.l),
-      c:Number(c.c)
-    }))
-    .filter(c => c.t && c.h && c.l && c.c)
-    .sort((a,b) => a.t-b.t);
+function normalizeList(data){
+  if(Array.isArray(data)) return data;
+  if(Array.isArray(data.items)) return data.items;
+  if(Array.isArray(data.symbols)) return data.symbols;
+  if(Array.isArray(data.data)) return data.data;
+  return [];
 }
 
-function ema(values, period){
-  if(values.length < period) return null;
-  const k = 2/(period+1);
-  let result = values.slice(0,period).reduce((a,b)=>a+b,0)/period;
-  for(let i=period;i<values.length;i++){
-    result = values[i]*k + result*(1-k);
+async function loadSymbols(){
+  const status=document.getElementById("status");
+  try{
+    const data=await getJSON(API+"/active");
+    allSymbols=normalizeList(data).map(x=>({
+      name:x.name || x.symbol,
+      description:x.description || x.name || x.symbol,
+      type:x.type || x.category || ""
+    })).filter(x=>x.name);
+
+    if(!allSymbols.length) throw new Error("لم تصل قائمة الأدوات.");
+
+    currentDayGroup=bonusGroup();
+    filterSymbols();
+
+    const dayNames=["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
+    const today=dayNames[new Date().getDay()];
+    status.innerHTML=
+      "تم تحميل "+allSymbols.length+" أداة ذات بيانات نشطة."+
+      "<br>اليوم: "+today+
+      "<br>مجموعة البونص حسب الجدول: "+currentDayGroup+
+      "<br><span class='small'>الأدوات المعروضة ليست بالضرورة كلها متاحة في حسابك.</span>";
+  }catch(e){
+    status.innerHTML="<span class='wait'>تعذر تحميل الأسواق: "+e.message+
+      "</span><br>جرّب تحديث الصفحة لاحقاً.";
   }
-  return result;
 }
 
-function rsi(values, period=14){
-  if(values.length < period+1) return null;
-  let gains=0, losses=0;
+function filterSymbols(){
+  const group=document.getElementById("group").value;
+  const q=document.getElementById("search").value.toLowerCase().trim();
+  const select=document.getElementById("symbol");
+  const previous=select.value;
+
+  let list=allSymbols.filter(x=>{
+    const g=groupName(x.type);
+    const matchesGroup=group==="all" || group===g;
+    const matchesSearch=(x.name+" "+x.description).toLowerCase().includes(q);
+    return matchesGroup && matchesSearch;
+  });
+
+  list.sort((a,b)=>a.name.localeCompare(b.name));
+  select.innerHTML="";
+
+  list.forEach(x=>{
+    const option=document.createElement("option");
+    option.value=x.name;
+    option.textContent=x.name+" — "+x.description;
+    select.appendChild(option);
+  });
+
+  if(list.some(x=>x.name===previous)) select.value=previous;
+
+  if(!list.length){
+    const option=document.createElement("option");
+    option.textContent="لا توجد أدوات مطابقة";
+    option.value="";
+    select.appendChild(option);
+  }
+}
+
+function ema(values,period){
+  if(values.length<period) return null;
+  let v=values.slice(0,period).reduce((a,b)=>a+b,0)/period;
+  const k=2/(period+1);
+  for(let i=period;i<values.length;i++) v=values[i]*k+v*(1-k);
+  return v;
+}
+
+function rsi(values,period=14){
+  if(values.length<period+1) return null;
+  let gain=0,loss=0;
   for(let i=values.length-period;i<values.length;i++){
-    const change=values[i]-values[i-1];
-    if(change>0) gains+=change;
-    else losses-=change;
+    const d=values[i]-values[i-1];
+    if(d>0) gain+=d;
+    else loss-=d;
   }
-  if(losses===0) return 100;
-  const rs=(gains/period)/(losses/period);
-  return 100-(100/(1+rs));
+  if(loss===0) return 100;
+  const rs=gain/loss;
+  return 100-100/(1+rs);
 }
 
-function atr(candles, period=14){
-  if(candles.length < period+1) return null;
+function atr(bars,period=14){
+  if(bars.length<period+1) return null;
   const ranges=[];
-  for(let i=1;i<candles.length;i++){
-    const c=candles[i], p=candles[i-1];
-    ranges.push(Math.max(
-      c.h-c.l,
-      Math.abs(c.h-p.c),
-      Math.abs(c.l-p.c)
-    ));
+  for(let i=1;i<bars.length;i++){
+    const c=bars[i],p=bars[i-1];
+    ranges.push(Math.max(c.high-c.low,Math.abs(c.high-p.close),Math.abs(c.low-p.close)));
   }
-  const last=ranges.slice(-period);
-  return last.reduce((a,b)=>a+b,0)/period;
+  const a=ranges.slice(-period);
+  return a.reduce((x,y)=>x+y,0)/a.length;
 }
 
-function money(n){
-  return Number(n).toFixed(2);
+function fmt(n){
+  return Number(n).toFixed(5).replace(/0+$/,"").replace(/\.$/,"");
 }
 
 async function analyze(){
-  const button=document.getElementById("analyzeBtn");
+  const btn=document.getElementById("analyzeBtn");
   const result=document.getElementById("result");
+  const symbol=document.getElementById("symbol").value;
   const interval=document.getElementById("timeframe").value;
 
-  button.disabled=true;
-  result.innerHTML="⏳ جارٍ جلب الأسعار وتحليل الشموع...";
+  if(!symbol){
+    result.textContent="اختر أداة أولاً.";
+    return;
+  }
+
+  const selected=allSymbols.find(x=>x.name===symbol);
+  if(!selected){
+    result.textContent="الأداة غير موجودة في القائمة النشطة.";
+    return;
+  }
+
+  if(!isBonusAllowed(selected)){
+    result.innerHTML="<span class='wait'>هذه المجموعة ليست ضمن مجموعة البونص لهذا اليوم.</span>"+
+      "<br>يمكنك الاطلاع على بياناتها، لكن لا تعتمد إشارة لفتح صفقة بونص.";
+    return;
+  }
+
+  btn.disabled=true;
+  result.textContent="جارٍ جلب السعر والشموع المغلقة...";
 
   try{
-    const [spot, main, confirm]=await Promise.all([
-      getJSON(API+"spot?compact=1"),
-      getCandles(interval),
-      getCandles("15m")
+    const [tickData,candleData,trendData]=await Promise.all([
+      getJSON(API+"/"+encodeURIComponent(symbol)+"?allowStale=false"),
+      getJSON(API+"/"+encodeURIComponent(symbol)+"/ohlc?interval="+interval+"&limit=150"),
+      getJSON(API+"/"+encodeURIComponent(symbol)+"/ohlc?interval=15m&limit=150")
     ]);
 
-    const price=Number(spot.spot_usd_oz);
-    if(!price || !spot.updated_at) throw new Error("بيانات السعر غير مكتملة");
+    const tick=tickData;
+    if(tick.marketState!=="open" || tick.stale===true ||
+       Number(tick.quoteAgeSeconds)>120){
+      throw new Error("السوق مغلق أو السعر قديم. لا توجد توصية.");
+    }
 
-    const age=(Date.now()-new Date(spot.updated_at).getTime())/1000;
-    if(!Number.isFinite(age) || age>180 || age< -60)
-      throw new Error("بيانات السعر قديمة. حاول لاحقاً.");
+    const price=Number(tick.mid);
+    if(!Number.isFinite(price) || price<=0) throw new Error("السعر غير صالح.");
 
-    if(spot.data_state && spot.data_state.status!=="fresh")
-      throw new Error("مصدر السعر لا يؤكد أن البيانات حديثة.");
+    const bars=(candleData.bars||[]).filter(x=>!x.isOpen);
+    const trendBars=(trendData.bars||[]).filter(x=>!x.isOpen);
 
-    if(main.length<60 || confirm.length<60)
-      throw new Error("عدد الشموع غير كافٍ للتحليل.");
+    if(bars.length<40 || trendBars.length<40)
+      throw new Error("الشموع التاريخية غير كافية للتحليل.");
 
-    const latest=main[main.length-1];
-    const latest15=confirm[confirm.length-1];
-    const now=Date.now()/1000;
+    const closes=bars.map(x=>Number(x.close));
+    const trendCloses=trendBars.map(x=>Number(x.close));
 
-    if(now-latest.t>1200 || now-latest15.t>2400)
-      throw new Error("السوق متوقف أو بيانات الشموع قديمة. لا توجد توصية.");
+    const e9=ema(closes,9),e21=ema(closes,21);
+    const t9=ema(trendCloses,9),t21=ema(trendCloses,21);
+    const strength=rsi(closes);
+    const volatility=atr(bars);
 
-    const closes=main.map(c=>c.c);
-    const closes15=confirm.map(c=>c.c);
-
-    const fast=ema(closes,9);
-    const slow=ema(closes,21);
-    const fast15=ema(closes15,9);
-    const slow15=ema(closes15,21);
-    const strength=rsi(closes,14);
-    const volatility=atr(main,14);
-
-    if([fast,slow,fast15,slow15,strength,volatility].some(v=>v===null) ||
-       volatility<=0)
+    if([e9,e21,t9,t21,strength,volatility].some(x=>!Number.isFinite(x)) || volatility<=0)
       throw new Error("تعذر حساب المؤشرات.");
 
     let direction="";
-    if(fast>slow && latest.c>slow && strength>=52 &&
-       fast15>slow15){
+    if(e9>e21 && t9>t21 && strength>=52 && strength<=68 && price>e21)
       direction="buy";
-    }else if(fast<slow && latest.c<slow && strength<=48 &&
-             fast15<slow15){
+    else if(e9<e21 && t9<t21 && strength<=48 && strength>=32 && price<e21)
       direction="sell";
-    }
 
-    let html="<b>السوق:</b> الذهب XAUUSD<br>";
-    html+="<b>السعر الاسترشادي:</b> "+money(price)+"<br>";
-    html+="<b>الإطار:</b> "+interval+
-      " | <b>RSI:</b> "+strength.toFixed(1)+"<br>";
-    html+="<b>وقت السعر:</b> "+new Date(spot.updated_at).toLocaleString("ar");
+    const time=new Date(tick.timestamp||Date.now()).toLocaleString("ar");
+    let html="<b>"+symbol+"</b><br>"+
+      "السعر الحالي: "+fmt(price)+
+      "<br>RSI: "+strength.toFixed(1)+
+      "<br>الفريم: "+interval+
+      "<br>آخر تحديث: "+time;
 
     if(!direction){
       result.innerHTML=html+
         "<br><br><span class='wait'>لا توجد فرصة واضحة الآن.</span>"+
-        "<br>انتظر توافق اتجاه الإطارين والمؤشرات.";
+        "<br>شروط الاتجاه والتأكيد لم تجتمع.";
       return;
     }
 
-    const risk=volatility*1.3;
-    let stop, target1, target2, target3;
-
-    if(direction==="buy"){
-      stop=price-risk;
-      target1=price+risk;
-      target2=price+risk*1.5;
-      target3=price+risk*2;
-    }else{
-      stop=price+risk;
-      target1=price-risk;
-      target2=price-risk*1.5;
-      target3=price-risk*2;
-    }
+    const risk=volatility*1.5;
+    const stop=direction==="buy"?price-risk:price+risk;
+    const targets=direction==="buy"
+      ?[price+risk,price+risk*1.5,price+risk*2]
+      :[price-risk,price-risk*1.5,price-risk*2];
 
     const label=direction==="buy"?"شراء محتمل":"بيع محتمل";
     const cls=direction==="buy"?"buy":"sell";
 
     result.innerHTML=html+
       "<br><br><span class='"+cls+"'>إشارة "+label+"</span>"+
-      "<br><b>الدخول الاسترشادي:</b> "+money(price)+
-      "<br><b>وقف الخسارة:</b> "+money(stop)+
-      "<br><b>الهدف الأول:</b> "+money(target1)+
-      "<br><b>الهدف الثاني:</b> "+money(target2)+
-      "<br><b>الهدف الثالث:</b> "+money(target3)+
-      "<br><br>⚠️ اختبر الإشارة تجريبياً وقارن السعر مع Headway قبل أي قرار.";
-  }catch(error){
-    result.innerHTML="<span class='wait'>لم تصدر توصية</span><br>"+
-      error.message+
-      "<br>لا تدخل صفقة اعتماداً على بيانات غير مكتملة.";
+      "<br>الدخول الاسترشادي: "+fmt(price)+
+      "<br>وقف الخسارة: "+fmt(stop)+
+      "<br>الهدف الأول: "+fmt(targets[0])+
+      "<br>الهدف الثاني: "+fmt(targets[1])+
+      "<br>الهدف الثالث: "+fmt(targets[2])+
+      "<br><br><span class='small'>هذه نتيجة حسابية تجريبية وليست توصية مضمونة. تحقق من رمز الأداة وسعرها ومواصفاتها في Headway قبل أي قرار.</span>";
+  }catch(e){
+    result.innerHTML="<span class='wait'>لم تصدر إشارة</span><br>"+e.message;
   }finally{
-    button.disabled=false;
+    btn.disabled=false;
   }
 }
+
+loadSymbols();
 </script>
 </body>
 </html>
