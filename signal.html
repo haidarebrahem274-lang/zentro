@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -6,80 +7,230 @@
 <title>مساعد التداول الذكي</title>
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;background:#0b1220;color:#fff;
-  font-family:Arial,sans-serif;padding:20px
-}
+body{margin:0;background:#0b1220;color:#fff;font-family:Arial,sans-serif;padding:15px}
 .container{max-width:520px;margin:auto}
 h1{text-align:center;color:#43d9a3}
 .subtitle{text-align:center;color:#9ba9bd}
-.card{
-  background:#151f30;border:1px solid #29364b;
-  border-radius:16px;padding:18px;margin-top:18px
-}
+.card{background:#151f30;border:1px solid #29364a;border-radius:16px;padding:18px;margin-top:15px}
 label{display:block;margin:14px 0 8px}
-select,button{
-  width:100%;padding:14px;border-radius:10px;
-  font-size:16px;border:1px solid #34445c
-}
+select,button{width:100%;padding:14px;border-radius:10px;font-size:16px;border:1px solid #34445c}
 select{background:#0c1727;color:white}
-button{
-  margin-top:20px;background:#12a879;
-  color:white;font-weight:bold;border:0
-}
-button:active{opacity:.8}
-#result{
-  margin-top:18px;padding:15px;background:#0c1727;
-  border-radius:12px;line-height:2;text-align:center
-}
-.small{font-size:12px;color:#9ba9bd;text-align:center}
+button{margin-top:20px;background:#12a879;color:white;font-weight:bold;border:0}
+button:disabled{opacity:.6}
+#result{margin-top:18px;padding:15px;background:#0c1727;border-radius:12px;line-height:2;white-space:normal}
+.small{font-size:12px;color:#9ba9bd;line-height:1.8}
+.buy{color:#43d9a3;font-weight:bold}
+.sell{color:#ff7373;font-weight:bold}
+.wait{color:#ffd166;font-weight:bold}
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>مساعد التداول الذكي</h1>
-  <p class="subtitle">اطلب تحليل السوق وقت ما بدك</p>
+<h1>مساعد التداول الذكي</h1>
+<p class="subtitle">تحليل الذهب وإظهار فرصة محتملة عند توفر الشروط</p>
 
-  <div class="card">
-    <label for="market">اختر السوق</label>
-    <select id="market">
-      <option value="XAUUSD">الذهب XAUUSD</option>
-      <option value="EURUSD">اليورو دولار EURUSD</option>
-      <option value="GBPUSD">الباوند دولار GBPUSD</option>
-      <option value="BTCUSD">البيتكوين BTCUSD</option>
-      <option value="US500">مؤشر US500</option>
-    </select>
+<div class="card">
+<label>السوق</label>
+<select id="market">
+<option value="xau">الذهب XAUUSD</option>
+</select>
 
-    <label for="timeframe">اختر الفريم</label>
-    <select id="timeframe">
-      <option value="5">5 دقائق M5</option>
-      <option value="15">15 دقيقة M15</option>
-      <option value="30">30 دقيقة M30</option>
-      <option value="60">ساعة H1</option>
-    </select>
+<label>الإطار الزمني</label>
+<select id="timeframe">
+<option value="5m">M5 - 5 دقائق</option>
+<option value="15m">M15 - 15 دقيقة</option>
+<option value="30m">M30 - 30 دقيقة</option>
+<option value="60m">H1 - ساعة</option>
+</select>
 
-    <button onclick="analyze()">حلّل السوق الآن</button>
+<button id="analyzeBtn" onclick="analyze()">حلّل السوق الآن</button>
+<div id="result">اختر الإطار الزمني واضغط زر التحليل.</div>
+</div>
 
-    <div id="result">
-      اختر السوق واضغط زر التحليل.
-    </div>
-  </div>
-
-  <p class="small">
-    لن يتم عرض إشارة تداول قبل ربط مصدر أسعار مباشر والتحقق من البيانات.
-    الإشارات ليست ضماناً للربح.
-  </p>
+<p class="small">
+مصدر البيانات: XAUS. السعر استرشادي وقد يختلف عن سعر وسيطك.
+الإشارات تجريبية وليست ضماناً للربح. لا تستخدمها قبل اختبارها على حساب تجريبي.
+</p>
 </div>
 
 <script>
-function analyze(){
-  const market=document.getElementById("market").value;
-  const tf=document.getElementById("timeframe").value;
-  document.getElementById("result").innerHTML=
-    "السوق: "+market+"<br>"+
-    "الفريم: M"+(tf>=60 ? "60" : tf)+
-    "<br><br>⚠️ مصدر الأسعار المباشرة غير مربوط بعد."+
-    "<br>لا يمكن إصدار صفقة حقيقية حالياً.";
+const API = "https://xaus.com/api/v1/";
+
+async function getJSON(url){
+  const response = await fetch(url);
+  if(!response.ok) throw new Error("تعذر جلب بيانات السوق");
+  return await response.json();
+}
+
+async function getCandles(interval){
+  const ranges = {
+    "5m":"5d",
+    "15m":"5d",
+    "30m":"1mo",
+    "60m":"3mo"
+  };
+  const url = API + "chart?symbol=xau&range=" +
+    ranges[interval] + "&interval=" + interval;
+  const data = await getJSON(url);
+  const points = data.points || data.data || [];
+  return points
+    .map(c => ({
+      t:Number(c.t),
+      o:Number(c.o),
+      h:Number(c.h),
+      l:Number(c.l),
+      c:Number(c.c)
+    }))
+    .filter(c => c.t && c.h && c.l && c.c)
+    .sort((a,b) => a.t-b.t);
+}
+
+function ema(values, period){
+  if(values.length < period) return null;
+  const k = 2/(period+1);
+  let result = values.slice(0,period).reduce((a,b)=>a+b,0)/period;
+  for(let i=period;i<values.length;i++){
+    result = values[i]*k + result*(1-k);
+  }
+  return result;
+}
+
+function rsi(values, period=14){
+  if(values.length < period+1) return null;
+  let gains=0, losses=0;
+  for(let i=values.length-period;i<values.length;i++){
+    const change=values[i]-values[i-1];
+    if(change>0) gains+=change;
+    else losses-=change;
+  }
+  if(losses===0) return 100;
+  const rs=(gains/period)/(losses/period);
+  return 100-(100/(1+rs));
+}
+
+function atr(candles, period=14){
+  if(candles.length < period+1) return null;
+  const ranges=[];
+  for(let i=1;i<candles.length;i++){
+    const c=candles[i], p=candles[i-1];
+    ranges.push(Math.max(
+      c.h-c.l,
+      Math.abs(c.h-p.c),
+      Math.abs(c.l-p.c)
+    ));
+  }
+  const last=ranges.slice(-period);
+  return last.reduce((a,b)=>a+b,0)/period;
+}
+
+function money(n){
+  return Number(n).toFixed(2);
+}
+
+async function analyze(){
+  const button=document.getElementById("analyzeBtn");
+  const result=document.getElementById("result");
+  const interval=document.getElementById("timeframe").value;
+
+  button.disabled=true;
+  result.innerHTML="⏳ جارٍ جلب الأسعار وتحليل الشموع...";
+
+  try{
+    const [spot, main, confirm]=await Promise.all([
+      getJSON(API+"spot?compact=1"),
+      getCandles(interval),
+      getCandles("15m")
+    ]);
+
+    const price=Number(spot.spot_usd_oz);
+    if(!price || !spot.updated_at) throw new Error("بيانات السعر غير مكتملة");
+
+    const age=(Date.now()-new Date(spot.updated_at).getTime())/1000;
+    if(!Number.isFinite(age) || age>180 || age< -60)
+      throw new Error("بيانات السعر قديمة. حاول لاحقاً.");
+
+    if(spot.data_state && spot.data_state.status!=="fresh")
+      throw new Error("مصدر السعر لا يؤكد أن البيانات حديثة.");
+
+    if(main.length<60 || confirm.length<60)
+      throw new Error("عدد الشموع غير كافٍ للتحليل.");
+
+    const latest=main[main.length-1];
+    const latest15=confirm[confirm.length-1];
+    const now=Date.now()/1000;
+
+    if(now-latest.t>1200 || now-latest15.t>2400)
+      throw new Error("السوق متوقف أو بيانات الشموع قديمة. لا توجد توصية.");
+
+    const closes=main.map(c=>c.c);
+    const closes15=confirm.map(c=>c.c);
+
+    const fast=ema(closes,9);
+    const slow=ema(closes,21);
+    const fast15=ema(closes15,9);
+    const slow15=ema(closes15,21);
+    const strength=rsi(closes,14);
+    const volatility=atr(main,14);
+
+    if([fast,slow,fast15,slow15,strength,volatility].some(v=>v===null) ||
+       volatility<=0)
+      throw new Error("تعذر حساب المؤشرات.");
+
+    let direction="";
+    if(fast>slow && latest.c>slow && strength>=52 &&
+       fast15>slow15){
+      direction="buy";
+    }else if(fast<slow && latest.c<slow && strength<=48 &&
+             fast15<slow15){
+      direction="sell";
+    }
+
+    let html="<b>السوق:</b> الذهب XAUUSD<br>";
+    html+="<b>السعر الاسترشادي:</b> "+money(price)+"<br>";
+    html+="<b>الإطار:</b> "+interval+
+      " | <b>RSI:</b> "+strength.toFixed(1)+"<br>";
+    html+="<b>وقت السعر:</b> "+new Date(spot.updated_at).toLocaleString("ar");
+
+    if(!direction){
+      result.innerHTML=html+
+        "<br><br><span class='wait'>لا توجد فرصة واضحة الآن.</span>"+
+        "<br>انتظر توافق اتجاه الإطارين والمؤشرات.";
+      return;
+    }
+
+    const risk=volatility*1.3;
+    let stop, target1, target2, target3;
+
+    if(direction==="buy"){
+      stop=price-risk;
+      target1=price+risk;
+      target2=price+risk*1.5;
+      target3=price+risk*2;
+    }else{
+      stop=price+risk;
+      target1=price-risk;
+      target2=price-risk*1.5;
+      target3=price-risk*2;
+    }
+
+    const label=direction==="buy"?"شراء محتمل":"بيع محتمل";
+    const cls=direction==="buy"?"buy":"sell";
+
+    result.innerHTML=html+
+      "<br><br><span class='"+cls+"'>إشارة "+label+"</span>"+
+      "<br><b>الدخول الاسترشادي:</b> "+money(price)+
+      "<br><b>وقف الخسارة:</b> "+money(stop)+
+      "<br><b>الهدف الأول:</b> "+money(target1)+
+      "<br><b>الهدف الثاني:</b> "+money(target2)+
+      "<br><b>الهدف الثالث:</b> "+money(target3)+
+      "<br><br>⚠️ اختبر الإشارة تجريبياً وقارن السعر مع Headway قبل أي قرار.";
+  }catch(error){
+    result.innerHTML="<span class='wait'>لم تصدر توصية</span><br>"+
+      error.message+
+      "<br>لا تدخل صفقة اعتماداً على بيانات غير مكتملة.";
+  }finally{
+    button.disabled=false;
+  }
 }
 </script>
 </body>
