@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مساعد التداول الذكي</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;background:#0b1220;color:#fff;
+  font-family:Arial,sans-serif;padding:20px
+}
+.container{max-width:520px;margin:auto}
+h1{text-align:center;color:#43d9a3}
+.subtitle{text-align:center;color:#9ba9bd}
+.card{
+  background:#151f30;border:1px solid #29364b;
+  border-radius:16px;padding:18px;margin-top:18px
+}
+label{display:block;margin:14px 0 8px}
+select,button{
+  width:100%;padding:14px;border-radius:10px;
+  font-size:16px;border:1px solid #34445c
+}
+select{background:#0c1727;color:white}
+button{
+  margin-top:20px;background:#12a879;
+  color:white;font-weight:bold;border:0
+}
+button:active{opacity:.8}
+#result{
+  margin-top:18px;padding:15px;background:#0c1727;
+  border-radius:12px;line-height:2;text-align:center
+}
+.small{font-size:12px;color:#9ba9bd;text-align:center}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>مساعد التداول الذكي</h1>
+  <p class="subtitle">اطلب تحليل السوق وقت ما بدك</p>
+
+  <div class="card">
+    <label for="market">اختر السوق</label>
+    <select id="market">
+      <option value="XAUUSD">الذهب XAUUSD</option>
+      <option value="EURUSD">اليورو دولار EURUSD</option>
+      <option value="GBPUSD">الباوند دولار GBPUSD</option>
+      <option value="BTCUSD">البيتكوين BTCUSD</option>
+      <option value="US500">مؤشر US500</option>
+    </select>
+
+    <label for="timeframe">اختر الفريم</label>
+    <select id="timeframe">
+      <option value="5">5 دقائق M5</option>
+      <option value="15">15 دقيقة M15</option>
+      <option value="30">30 دقيقة M30</option>
+      <option value="60">ساعة H1</option>
+    </select>
+
+    <button onclick="analyze()">حلّل السوق الآن</button>
+
+    <div id="result">
+      اختر السوق واضغط زر التحليل.
+    </div>
+  </div>
+
+  <p class="small">
+    لن يتم عرض إشارة تداول قبل ربط مصدر أسعار مباشر والتحقق من البيانات.
+    الإشارات ليست ضماناً للربح.
+  </p>
+</div>
+
+<script>
+function analyze(){
+  const market=document.getElementById("market").value;
+  const tf=document.getElementById("timeframe").value;
+  document.getElementById("result").innerHTML=
+    "السوق: "+market+"<br>"+
+    "الفريم: M"+(tf>=60 ? "60" : tf)+
+    "<br><br>⚠️ مصدر الأسعار المباشرة غير مربوط بعد."+
+    "<br>لا يمكن إصدار صفقة حقيقية حالياً.";
+}
+</script>
+</body>
+</html>
